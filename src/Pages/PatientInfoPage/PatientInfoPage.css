@@ -1,0 +1,119 @@
+.info-page-container {
+  padding: 120px 2rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  
+}
+
+.info-page {
+  background-color: #a7cdf1;;
+  padding: 7rem;
+  border-radius: 12px;
+  width: 720px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.patient-info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.patient-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.patient-details h2 {
+  color: #1E3A8A;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  border-bottom: 2px solid #3B82F6;
+  padding-bottom: 0.5rem;
+}
+
+.detail-section {
+  background-color: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #3B82F6;
+}
+
+.detail-section h3 {
+  color: #1E3A8A;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.detail-section p {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.teeth-present {
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+  font-family: monospace;
+  overflow-x: auto;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.action-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-btn.maxillaire {
+  background-color: #3a7bd5;
+  color: white;
+}
+
+.action-btn.mandibulaire {
+  background-color: #304b81;
+  color: white;
+}
+
+.upload-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #6a93e1;
+  color: #333;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.image-preview {
+  margin-top: 1rem;
+  max-width: 300px;
+  border: 1px dashed #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 200px;
+}
+
+@media (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .action-btn, .upload-btn {
+    width: 100%;
+  }
+}

@@ -1,131 +1,19 @@
-/* App.css */
-
-/* Global styles */
 body {
-  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  background: url('C:\Users\clien\Desktop\nour1.1\react-prediction-form\public\denture2.jpeg') no-repeat center center fixed;  /* Add background image */
-  background-size: cover;  /* Make sure the background covers the entire screen */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
-  height: 100vh;  /* Ensure the background covers the entire height */
+  background-color: #f0f9ff;
 }
 
-/* Container */
-.container {
-  max-width: 800px;
-  margin: 30px auto;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.8); /* Add opacity for readability */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Title */
-.title {
-  text-align: center;
-  font-size: 2rem;
-  color: #2c3e50;
-  margin-bottom: 10px;
-}
-
-/* Description */
-.description {
-  text-align: center;
-  font-size: 1rem;
-  color: #7f8c8d;
-  margin-bottom: 20px;
-}
-
-/* Form styles */
-.form {
+.dental-page {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  min-height: 100vh;
 }
 
-.form-group {
-  display: flex;
-  justify-content: space-between; /* Ensures spacing between elements */
-  gap: 15px; /* Adds space between the input fields */
-}
-.feature-input {
-  width: 48%; /* Ensures both input fields take up equal width */
-  display: flex;
-  flex-direction: column; /* Keeps the label above the input field */
-}
-
-
-
-label {
-  font-size: 1rem;
-  color: #34495e;
-}
-
-.input {
-  padding: 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 5px;
-}
-
-.input:focus {
-  border-color: #3498db;
-  outline: none;
-}
-
-/* Button styles */
-.button {
-  padding: 12px;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.button:hover {
-  background-color: #2980b9;
-}
-
-.button:disabled {
-  background-color: #bdc3c7;
-  cursor: not-allowed;
-}
-
-/* Prediction result */
-.prediction {
-  margin-top: 20px;
-  text-align: center;
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #2ecc71;
-}
-
-/* Responsive styles */
-@media (max-width: 600px) {
-  .container {
-    padding: 15px;
-    margin: 10px;
-  }
-
-  .title {
-    font-size: 1.6rem;
-  }
-
-  .description {
-    font-size: 0.9rem;
-  }
-
-  .button {
-    font-size: 0.9rem;
-    padding: 10px;
-  }
-
-  .input {
-    font-size: 0.9rem;
-  }
+/* Add smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }

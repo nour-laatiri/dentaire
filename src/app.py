@@ -38,8 +38,7 @@ def predict():
         features_encoded = []
         for col, value in input_dict.items():
             value = value.strip().lower() if value else "unknown"
-            if value == "unkown":
-                value = "unknown"  # Fix typo from frontend or DB
+            # Fix typo from frontend or DB
 
             # Replace empty or null with 'unknown'
             le = label_encoders.get(col)
