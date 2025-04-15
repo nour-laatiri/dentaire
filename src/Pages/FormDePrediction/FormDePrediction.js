@@ -47,6 +47,21 @@ export default function PredictionFormPage() {
     }
   };
 
+  // Function to group form fields into pairs
+  const groupFieldsIntoPairs = () => {
+    const fields = Object.keys(formData);
+    const pairs = [];
+    
+    for (let i = 0; i < fields.length; i += 2) {
+      const pair = fields.slice(i, i + 2);
+      pairs.push(pair);
+    }
+    
+    return pairs;
+  };
+
+  const fieldPairs = groupFieldsIntoPairs();
+
   return (
     <div className="dental-page">
       <header className="header">
@@ -75,21 +90,24 @@ export default function PredictionFormPage() {
           )}
 
           <form onSubmit={handleSubmit} className="prediction-form">
-            {/* Form fields remain the same */}
-            {Object.keys(formData).map((key, index) => (
-              <div className="form-group" key={key}>
-                <div className="feature-input">
-                  <label>{key}</label>
-                  <input
-                    type="text"
-                    name={key}
-                    value={formData[key]}
-                    onChange={handleChange}
-                    className="input"
-                  />
+            <div className="form-group">
+              {fieldPairs.map((pair, index) => (
+                <div className="feature-pair" key={`pair-${index}`}>
+                  {pair.map((fieldName) => (
+                    <div className="feature-input" key={fieldName}>
+                      <label>{fieldName}</label>
+                      <input
+                        type="text"
+                        name={fieldName}
+                        value={formData[fieldName]}
+                        onChange={handleChange}
+                        className="input"
+                      />
+                    </div>
+                  ))}
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
             
             <button type="submit" className="submit-btn">
               Exécuter la Prédiction {predictionType}
