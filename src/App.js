@@ -25,6 +25,7 @@ function App() {
           <Route path="/FormDePrediction" element={<FormDePrediction />} />
           <Route path="/PatientInfoPage" element={<PatientInfoPage />} />
           
+          
         </Routes>
       </div>
       <Footer/>
