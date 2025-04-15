@@ -6,9 +6,11 @@ import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
 import Service from "./components/Service/Service";
 import FormPatient from "./Pages/FormPatient/FormPatient";
-import FormDePrediction from "./Pages/FormDePrediction/FormDePrediction";
+
 import Footer from "./components/Footer/Footer";
 import PatientInfoPage  from "./Pages/PatientInfoPage/PatientInfoPage";
+import FormDePredictionMand from "./Pages/FormDePrediction/FormDePredictionMand/FormDePredictionMand";
+import FormDePredictionMax from "./Pages/FormDePrediction/FormDePredictionMax/FormDePredictionMax";
 import "./App.css";
 
 function App() {
@@ -22,8 +24,10 @@ function App() {
           <Route path="/service" element={<Service />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/FormPatient" element={<FormPatient />} />
-          <Route path="/FormDePrediction" element={<FormDePrediction />} />
+          
           <Route path="/PatientInfoPage" element={<PatientInfoPage />} />
+          <Route path="/FormDePredictionMax" element={<FormDePredictionMax />} />
+          <Route path="/FormDePredictionMand" element={<FormDePredictionMand />} />
           
         </Routes>
       </div>

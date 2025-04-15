@@ -22,7 +22,11 @@ export default function PatientInfoPage() {
   };
 
   const navigateToPrediction = (type) => {
-    navigate('/FormDePrediction', { 
+    const route = type === 'maxillaire' 
+      ? '/FormDePredictionMax' 
+      : '/FormDePredictionMand';
+    
+    navigate(route, { 
       state: { 
         patientData,
         image: selectedImage,

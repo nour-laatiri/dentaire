@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
-import "../FormDePrediction/FormDePrediction.css";
+import "../FormDePredictionMax/FormDePredictionMax.css";
 
 export default function PredictionFormPage() {
   const location = useLocation();
@@ -36,7 +36,7 @@ export default function PredictionFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/predict", {
+      const response = await axios.post("http://localhost:5001/predict", {
         ...formData,
         patientData,
         predictionType
