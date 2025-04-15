@@ -7,9 +7,9 @@ app = Flask(__name__)
 CORS(app)  # Allow React frontend to communicate with Flask
 
 # Load model and encoders
-model = pickle.load(open(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\prothese_model.pkl", "rb"))
-sc = pickle.load(open(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\scaler.pkl", "rb"))
-label_encoders = pickle.load(open(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\label_encoders.pkl", "rb"))
+model = pickle.load(open(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\prothese_model(mand).pkl", "rb"))
+sc = pickle.load(open(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\scaler(mand).pkl", "rb"))
+label_encoders = pickle.load(open(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\label_encoders(mand).pkl", "rb"))
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -20,14 +20,10 @@ def predict():
         # Prepare dictionary of input features
         input_dict = {
             'crete': data['crete'],
-            'palais': data['palais'],
             "forme de l'arcade": data["forme de l'arcade"],
-            'zone de Schroeder': data['zone de Schroeder'],
             'fibre muqueux': data['fibre muqueux'],
-            'gencive': data['gencive'],
             'Frein labial': data['Frein labial'],
-            'tuberosite': data['tuberosite'],
-            'voile': data['voile'],
+            'eminences':data['eminences'],
             'classe de kennedy': data['classe de kennedy'],
             'pp': data['pp']
         }
@@ -79,4 +75,4 @@ def predict():
         return jsonify({"error": str(e)}), 400
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(port=5000)
