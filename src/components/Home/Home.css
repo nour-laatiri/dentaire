@@ -1,0 +1,85 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    padding-top: 120px;
+    background-color: rgba(239, 246, 255, 0.85);
+    border-radius: 12px;
+    margin: 2rem;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1470px;
+  }
+  
+  @media (min-width: 1024px) {
+    .home-container {
+      flex-direction: row;
+      padding: 4rem;
+    }
+  }
+  
+  .text-content {
+    flex: 1;
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  @media (min-width: 1024px) {
+    .text-content {
+      text-align: left;
+    }
+  }
+  
+  .text-content h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  @media (min-width: 768px) {
+    .text-content h1 {
+      font-size: 3rem;
+    }
+  }
+  
+  .text-content h1 span {
+    color: #3B82F6;
+  }
+  
+  .text-content p {
+    color: #1E3A8A;
+    margin: 1rem 0;
+    line-height: 1.6;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .illustration {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    flex: 1;
+    height: 500px;
+    background-image: url('C:\Users\clien\Desktop\nour1.1\react-prediction-form\public\dental-chair.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    aspect-ratio: 1 / 1;
+  }
+  
+  .learn-more {
+    padding: 0.75rem 2rem;
+    background-color: #3B82F6;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .learn-more:hover {
+    background-color: #2563EB;
+  }

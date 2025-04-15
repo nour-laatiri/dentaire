@@ -1,0 +1,245 @@
+/* ===================== */
+/* === BASE STYLES === */
+/* ===================== */
+
+.dental-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    min-height: 100vh;
+    background-color: #fcfcfd;
+  }
+  
+  /* ===================== */
+  /* === HEADER STYLES === */
+  /* ===================== */
+
+  
+  .logo-text {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #3B82F6;
+    text-decoration: none;
+    margin-right: 2rem;
+  }
+  
+  .nav {
+    display: flex;
+    gap: 1.5rem;
+    margin: 1rem 0;
+  }
+  
+  .nav a {
+    text-decoration: none;
+    color: #0b0b0b;
+    transition: color 0.3s ease;
+    font-weight: 500;
+  }
+  
+  .nav a:hover {
+    color: #3B82F6;
+  }
+  
+  .buttons {
+    display: flex;
+    gap: 0.75rem;
+  }
+  
+  
+  
+  /* ======================= */
+  /* === FORM CONTAINER === */
+  /* ======================= */
+  .form-page-container {
+    padding: 120px 2rem 2rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .form-page {
+    background-color: #a7cdf1;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  .form-page h2 {
+    color: #1E3A8A;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  /* ================== */
+  /* === FORM STYLES === */
+  /* ================== */
+  .patient-form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  
+  .form-section {
+    background: #dae7f6;
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .form-section h3 {
+    color: #3B82F6;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-row label {
+    margin-bottom: 0.75rem;
+    color: #1E3A8A;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  
+  .form-row input[type="text"],
+  .form-row input[type="number"],
+  .form-row select,
+  .form-row textarea {
+    padding: 0.85rem;
+    border: 1px solid #CBD5E0;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-row input[type="text"]:focus,
+  .form-row input[type="number"]:focus,
+  .form-row select:focus,
+  .form-row textarea:focus {
+    border-color: #3B82F6;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+  
+  .form-row textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  
+  /* ===================== */
+  /* === TEETH SECTION === */
+  /* ===================== */
+  .teeth-section {
+    overflow-x: auto;
+    padding: 1.5rem;
+  }
+  
+ /* Teeth Presence Simplified Layout */
+.teeth-grid-simple {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.teeth-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tooth-input-pair {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+}
+
+.tooth-input {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tooth-input label {
+  margin-bottom: 0.5rem;
+  color: #1E3A8A;
+  font-weight: 500;
+}
+
+.tooth-input input {
+  padding: 0.75rem;
+  border: 1px solid #CBD5E0;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .tooth-input-pair {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+  /* ==================== */
+  /* === SUBMIT BUTTON === */
+  /* ==================== */
+  .submit-btn {
+    padding: 1rem 2.5rem;
+    background-color: #3B82F6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1.5rem;
+    align-self: center;
+  }
+  
+  .submit-btn:hover {
+    background-color: #2563EB;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+  
+  /* ======================== */
+  /* === RESPONSIVE STYLES === */
+  /* ======================== */
+  @media (min-width: 768px) {
+    .header {
+      padding: 1.5rem 3rem;
+      flex-wrap: nowrap;
+    }
+    
+    .form-row {
+      flex-direction: row;
+      align-items: center;
+    }
+    
+    .form-row label {
+      width: 220px;
+      margin-bottom: 0;
+    }
+    
+    .form-page {
+      padding: 3rem;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .form-page-container {
+      padding: 120px 3rem 3rem;
+    }
+    
+    .teeth-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
