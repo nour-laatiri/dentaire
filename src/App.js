@@ -6,16 +6,16 @@ import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
 import Service from "./components/Service/Service";
 import FormPatient from "./Pages/FormPatient/FormPatient";
-
 import Footer from "./components/Footer/Footer";
-import PatientInfoPage  from "./Pages/PatientInfoPage/PatientInfoPage";
+import PatientInfoPage from "./Pages/PatientInfoPage/PatientInfoPage";
 import FormDePredictionMand from "./Pages/FormDePrediction/FormDePredictionMand/FormDePredictionMand";
 import FormDePredictionMax from "./Pages/FormDePrediction/FormDePredictionMax/FormDePredictionMax";
+import DeepLearning from "./Pages/DeepLearning/DeepLearning";
 import "./App.css";
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <div className="dental-page">
         <Navbar />
         <Routes>
@@ -24,12 +24,15 @@ function App() {
           <Route path="/service" element={<Service />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/FormPatient" element={<FormPatient />} />
-          
           <Route path="/PatientInfoPage" element={<PatientInfoPage />} />
           <Route path="/FormDePredictionMax" element={<FormDePredictionMax />} />
           <Route path="/FormDePredictionMand" element={<FormDePredictionMand />} />
+<<<<<<< HEAD
           
           
+=======
+          <Route path="/DeepLearning" element={<DeepLearning />} />
+>>>>>>> 00d72c975d4ccf94abd77242a11d591b6783cd63
         </Routes>
       </div>
       <Footer/>

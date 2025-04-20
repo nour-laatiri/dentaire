@@ -7,6 +7,7 @@ export default function PatientInfoPage() {
   const navigate = useNavigate();
   const [patientData, setPatientData] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [imageFile, setImageFile] = useState(null); // Store the actual file object
 
   useEffect(() => {
     if (location.state?.patientInfo) {
@@ -18,6 +19,7 @@ export default function PatientInfoPage() {
     const file = e.target.files[0];
     if (file) {
       setSelectedImage(URL.createObjectURL(file));
+      setImageFile(file); // Store the file object for later use
     }
   };
 
@@ -31,6 +33,21 @@ export default function PatientInfoPage() {
         patientData,
         image: selectedImage,
         predictionType: type 
+      } 
+    });
+  };
+
+  const navigateToDeepLearning = () => {
+    if (!selectedImage) {
+      alert("Please upload an image first");
+      return;
+    }
+    
+    navigate('/DeepLearning', { 
+      state: { 
+        patientData,
+        image: selectedImage,
+        imageFile: imageFile // Pass the actual file object
       } 
     });
   };
@@ -60,6 +77,8 @@ export default function PatientInfoPage() {
               <div className="patient-details">
                 <h2>{patientData.prenom} {patientData.nom}</h2>
                 
+           
+                
                 <div className="detail-section">
                   <h3>Informations Personnelles</h3>
                   <p><strong>Âge:</strong> {patientData.age}</p>
@@ -88,7 +107,6 @@ export default function PatientInfoPage() {
                   )}
                 </div>
               </div>
-
               <div className="action-buttons">
                 <button 
                   className="action-btn maxillaire"
@@ -101,6 +119,13 @@ export default function PatientInfoPage() {
                   onClick={() => navigateToPrediction('mandibulaire')}
                 >
                   Prédiction Mandibulaire
+                </button>
+                <button
+                  className="action-btn deep-learning"
+                  onClick={navigateToDeepLearning}
+                  disabled={!selectedImage}
+                >
+                  analyse d'equilibre de prothése
                 </button>
                 <label className="upload-btn">
                   Téléverser une Image
@@ -126,3 +151,6 @@ export default function PatientInfoPage() {
     </div>
   );
 }
+              
+
+            

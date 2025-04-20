@@ -17,6 +17,7 @@ export default function PredictionFormPage() {
     pp: "",
   });
   const [prediction, setPrediction] = useState(null);
+  const [modifications, setModifications] = useState([]);
 
   useEffect(() => {
     if (location.state) {
@@ -32,23 +33,20 @@ export default function PredictionFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/predict", {
+      const response = await axios.post("http://localhost:5003/predict", {
         ...formData,
         patientData,
         predictionType
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
       });
       setPrediction(response.data.label);
+      // Set modifications if they exist in the response
+      if (response.data.modifications) {
+        setModifications(response.data.modifications);
+      } else {
+        setModifications([]);
+      }
     } catch (error) {
       console.error("Prediction error:", error);
-      if (error.response) {
-        console.error("Response data:", error.response.data);
-        console.error("Response status:", error.response.status);
-      }
-      alert("Prediction failed: " + (error.response?.data?.error || error.message));
     }
   };
 
@@ -122,7 +120,21 @@ export default function PredictionFormPage() {
           {prediction && (
             <div className="prediction-result">
               <h3>Résultat de la Prédiction {predictionType}:</h3>
-              <div className="prediction-value">{prediction}</div>
+              <div className={`prediction-value ${prediction === 'non favorable' ? 'non-favorable' : ''}`}>
+                {prediction}
+              </div>
+              
+              {/* Display modifications if prediction is non favorable */}
+              {prediction === 'non favorable' && modifications.length > 0 && (
+                <div className="modifications-section">
+                  <h4>Modifications recommandées:</h4>
+                  <ul className="modifications-list">
+                    {modifications.map((mod, index) => (
+                      <li key={index}>{mod}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           )}
         </div>

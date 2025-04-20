@@ -72,11 +72,45 @@ def predict():
             2: 'moyennement favorable'
         }
 
-        return jsonify({"prediction": prediction_label, "label": label_map[prediction_label]})
+        # Prepare response
+        response = {
+            "prediction": prediction_label, 
+            "label": label_map[prediction_label]
+        }
+
+        # Add modification recommendations for non favorable cases
+        if prediction_label == 1:  # non favorable
+            modifications = []
+            
+            # Check for hypertrophic tuberosity
+            if input_dict['tuberosite'].lower() == 'hypertrophiée':
+                modifications.append("Tubérosité hypertrophiée -> faire une chirurgie préprothétique tubérositaire")
+            
+            # Check for resorbed ridge
+            if input_dict['crete'].lower() == 'résorbée':
+                modifications.append("Crête résorbée -> faire un approfondissement du vestibule")
+            
+            # Check for non-adherent or thick mucosa
+            if input_dict['fibre muqueux'].lower() in ['non adhérente', 'épaisse', 'hypertrophiée']:
+                modifications.append("Fibromuqueuse non adhérente/épaisse/hypertrophiée -> faire un désépaississement muqueux")
+            
+            # Check for thin mucosa
+            if input_dict['fibre muqueux'].lower() == 'fine':
+                modifications.append("Fibre muqueux fine-> faire une empreinte anatomo-fonctionnelle avec un élastomère de faible viscosité")
+            
+            # Check for ogival or deep palate in PPAM context
+            if (input_dict['palais'].lower() in ['ogival', 'très profond'] and 
+                input_dict['pp'].lower() == 'ppam'):
+                modifications.append("Palais ogival/très profond dans le cadre de PPAM -> faire une conception en fer à cheval")
+            
+            if modifications:
+                response["modifications"] = modifications
+
+        return jsonify(response)
 
     except Exception as e:
         print("Error:", str(e))
         return jsonify({"error": str(e)}), 400
 
 if __name__ == "__main__":
-    app.run(port=5001)
+    app.run(port=5001 ,debug=True)

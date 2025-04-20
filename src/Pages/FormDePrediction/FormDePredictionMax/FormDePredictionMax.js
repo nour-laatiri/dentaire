@@ -21,6 +21,7 @@ export default function PredictionFormPage() {
     pp: "",
   });
   const [prediction, setPrediction] = useState(null);
+  const [modifications, setModifications] = useState([]);
 
   useEffect(() => {
     if (location.state) {
@@ -42,6 +43,12 @@ export default function PredictionFormPage() {
         predictionType
       });
       setPrediction(response.data.label);
+      // Set modifications if they exist in the response
+      if (response.data.modifications) {
+        setModifications(response.data.modifications);
+      } else {
+        setModifications([]);
+      }
     } catch (error) {
       console.error("Prediction error:", error);
     }
@@ -117,7 +124,21 @@ export default function PredictionFormPage() {
           {prediction && (
             <div className="prediction-result">
               <h3>Résultat de la Prédiction {predictionType}:</h3>
-              <div className="prediction-value">{prediction}</div>
+              <div className={`prediction-value ${prediction === 'non favorable' ? 'non-favorable' : ''}`}>
+                {prediction}
+              </div>
+              
+              {/* Display modifications if prediction is non favorable */}
+              {prediction === 'non favorable' && modifications.length > 0 && (
+                <div className="modifications-section">
+                  <h4>Modifications recommandées:</h4>
+                  <ul className="modifications-list">
+                    {modifications.map((mod, index) => (
+                      <li key={index}>{mod}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           )}
         </div>
