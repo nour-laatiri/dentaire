@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-df=pd.read_csv(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\Feuille de calcul sans titre - cleaned_mandibule (50 cas).xlsx - cleaned_mandibule (1) (8) (1).csv")
+df=pd.read_csv(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\mandibule - mandibule.csv")
 
 df.head()
 
@@ -44,17 +44,12 @@ X = df.drop(['facteur du osteo-muqueux'], axis=1)
 from sklearn.preprocessing import LabelEncoder
 
 # Identify categorical columns
+from sklearn.preprocessing import LabelEncoder
 categorical_columns = X.select_dtypes(include=['object']).columns
-label_encoders = {}
+label_encoder = LabelEncoder()
 
-
-X[categorical_columns] = X[categorical_columns].fillna("unknown").replace('', "unknown")
-
-# Make sure 'unknown' is in label encoder
 for col in categorical_columns:
-    le = LabelEncoder()
-    X[col] = le.fit_transform(X[col])
-    label_encoders[col] = le
+    X[col] = label_encoder.fit_transform(X[col].astype(str))
 
 
 X.head()
@@ -126,4 +121,4 @@ for class_label in range(3):  # Iterate through classes 0, 1, 2
 # Save model, scaler, and label encoder
 pickle.dump(rf_model, open('prothese_model(mand).pkl', 'wb'))
 pickle.dump(sc, open('scaler(mand).pkl', 'wb'))
-pickle.dump(label_encoders, open('label_encoders(mand).pkl', 'wb'))
+pickle.dump(label_encoder, open('label_encoders(mand).pkl', 'wb'))

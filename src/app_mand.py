@@ -67,12 +67,37 @@ def predict():
             1: 'non favorable',
             2: 'moyennement favorable'
         }
+        response = {
+            "prediction": prediction_label, 
+            "label": label_map[prediction_label]
+        }
+ # Add modification recommendations for non favorable cases
+        if prediction_label == 1:  # non favorable
+            modifications = []
+            
+            # Check for hypertrophic tuberosity
+            
+            # Check for resorbed ridge
+            if input_dict['crete'].lower() == 'résorbée':
+                modifications.append("Crête résorbée: faire un approfondissement du vestibule")
+            
+            # Check for non-adherent or thick mucosa
+            if input_dict['fibre muqueux'].lower() in ['non adhérente', 'épaisse', 'hypertrophiée']:
+                modifications.append("Fibromuqueuse non adhérente/épaisse/hypertrophiée: faire un désépaississement muqueux")
+            
+            # Check for thin mucosa
+            if input_dict['fibre muqueux'].lower() == 'fine':
+                modifications.append("Fibromuqueuse fine: faire une empreinte anatomo-fonctionnelle avec un élastomère de faible viscosité")
+            
+            
+            if modifications:
+                response["modifications"] = modifications
 
-        return jsonify({"prediction": prediction_label, "label": label_map[prediction_label]})
+        return jsonify(response)
 
     except Exception as e:
         print("Error:", str(e))
         return jsonify({"error": str(e)}), 400
 
 if __name__ == "__main__":
-    app.run(port=5000)
+    app.run(port=5000 ,debug=True)
