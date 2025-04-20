@@ -5,13 +5,13 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-df=pd.read_csv(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\cleaned_max (91cas) - cleaned_max (2) (2)(67%).csv")
+df=pd.read_csv(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\maxillaire(215 cas).csv")
 
 df.head()
 
 df.columns
 
-df = df.drop(['eminences','hygiene'], axis=1)
+df = df.drop(['hygiene'], axis=1)
 print(df.columns)
 
 
@@ -61,7 +61,7 @@ for col in categorical_columns:
 X.head()
 
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
@@ -73,7 +73,7 @@ print(y.value_counts(normalize=True))  # See class proportions
 
 # 9️⃣ Train Random Forest with class balancing
 from sklearn.ensemble import RandomForestClassifier
-rf_model = RandomForestClassifier(n_estimators=12, random_state=0, class_weight='balanced')
+rf_model = RandomForestClassifier(n_estimators=50, random_state=42, class_weight='balanced')
 rf_model.fit(X_train, y_train)
 
 from sklearn.metrics import accuracy_score
