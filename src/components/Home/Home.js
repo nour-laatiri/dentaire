@@ -18,8 +18,8 @@ export default function Home() {
             Bienvenue sur <span>PROTHEA</span>
           </h1>
           <p>
-            Nous façonnons des prothèses dentaires plus précises, plus humaines
-            et plus intelligentes, pour un meilleur sourire demain.
+          Prédiction du pronostic de l'équilibre de la prothèse mandibulaire et maxillaire.
+           Pourquoi y a-t-il une différence dans le texte entre le maxillaire et le mandibulaire ?
           </p>
           <button className="learn-more" onClick={handleExploreClick}>
             Explorer ➜
