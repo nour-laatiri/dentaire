@@ -64,6 +64,57 @@ export default function PredictionFormPage() {
   };
 
   const fieldPairs = groupFieldsIntoPairs();
+  const handlePrintPrediction = () => {
+    const printContent = `
+      <div style="padding: 20px; font-family: Arial, sans-serif;">
+        <h1 style="text-align: center;">Résultat de Prédiction ${predictionType}</h1>
+        
+        ${patientData ? `
+          <div style="margin-bottom: 20px;">
+            <h3>Patient: ${patientData.prenom} ${patientData.nom}</h3>
+            <p>Âge: ${patientData.age} | Sexe: ${patientData.sexe}</p>
+          </div>
+        ` : ''}
+        
+        <div style="margin-bottom: 20px;">
+          <h3>Caractéristiques:</h3>
+          <ul>
+            ${Object.entries(formData).map(([key, value]) => 
+              `<li><strong>${key}:</strong> ${value}</li>`
+            ).join('')}
+          </ul>
+        </div>
+        
+        ${prediction ? `
+          <div style="margin-top: 20px;">
+            <h3>Résultat:</h3>
+            <p style="font-weight: bold; color: ${prediction === 'non favorable' ? 'red' : 'green'};">
+              ${prediction}
+            </p>
+            ${modifications.length > 0 ? `
+              <div>
+                <h4>Modifications recommandées:</h4>
+                <ul>
+                  ${modifications.map(mod => `<li>${mod}</li>`).join('')}
+                </ul>
+              </div>
+            ` : ''}
+          </div>
+        ` : ''}
+        
+        <div style="margin-top: 20px; text-align: center; font-style: italic;">
+          Impression générée le ${new Date().toLocaleDateString()}
+        </div>
+      </div>
+    `;
+    
+    const originalContent = document.body.innerHTML;
+    document.body.innerHTML = printContent;
+    window.print();
+    document.body.innerHTML = originalContent;
+    window.location.reload();
+  };
+
 
   return (
     <div className="dental-page">
@@ -135,7 +186,14 @@ export default function PredictionFormPage() {
                   </ul>
                 </div>
               )}
+               <button 
+      className="print-btn"
+      onClick={handlePrintPrediction}
+    >
+      Imprimer cette Prédiction
+          </button>
             </div>
+            
           )}
         </div>
       </main>

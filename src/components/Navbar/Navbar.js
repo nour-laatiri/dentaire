@@ -15,8 +15,8 @@ export default function Navbar() {
         <Link to="/contact">Contact</Link>
       </nav>
       <div className="buttons">
-        <button className="signin">Connexion</button>
-        <button className="signup">Inscription</button>
+        <Link to="/signin" className="signin">Connexion</Link>
+        <Link to="/signup" className="signup">Inscription</Link>
       </div>
     </header>
   );

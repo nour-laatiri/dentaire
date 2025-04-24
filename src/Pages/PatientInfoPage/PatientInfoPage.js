@@ -51,7 +51,65 @@ export default function PatientInfoPage() {
       } 
     });
   };
-
+  const handlePrintPatientInfo = () => {
+    // Create a new window for printing
+    const printWindow = window.open('', '_blank');
+    
+    // Get the patient info card content
+    const cardClone = document.querySelector('.patient-info-card').cloneNode(true);
+    
+    // Remove elements we don't want to print
+    const elementsToRemove = [
+      '.action-buttons',
+      '.image-preview',
+      '.upload-btn'
+    ];
+    
+    elementsToRemove.forEach(selector => {
+      const element = cardClone.querySelector(selector);
+      if (element) element.remove();
+    });
+  
+    // Write the print content to the new window
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Informations du Patient</title>
+          <style>
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            h1 { text-align: center; margin-bottom: 30px; }
+            .detail-section { margin-bottom: 20px; }
+            strong { font-weight: bold; }
+            .teeth-present { display: inline-block; margin-left: 5px; }
+            .print-footer { 
+              margin-top: 20px; 
+              text-align: center; 
+              font-style: italic; 
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Informations du Patient</h1>
+          ${cardClone.innerHTML}
+          <div class="print-footer">
+            Impression générée le ${new Date().toLocaleDateString()}
+          </div>
+          <script>
+            // Automatically trigger print and close when done
+            window.onload = function() {
+              setTimeout(function() {
+                window.print();
+                window.close();
+              }, 100);
+            };
+          </script>
+        </body>
+      </html>
+    `);
+    
+    printWindow.document.close();
+  };
   return (
     <div className="dental-page">
       <header className="header">
@@ -127,6 +185,13 @@ export default function PatientInfoPage() {
                 >
                   analyse d'equilibre de prothése
                 </button>
+                <button 
+                className="action-btn print-btn"
+                onClick={handlePrintPatientInfo}
+>
+              Imprimer les Informations du Patient
+              </button>
+               
                 <label className="upload-btn">
                   Téléverser une Image
                   <input 
@@ -136,6 +201,7 @@ export default function PatientInfoPage() {
                     style={{ display: 'none' }} 
                   />
                 </label>
+               
               </div>
 
               {selectedImage && (
