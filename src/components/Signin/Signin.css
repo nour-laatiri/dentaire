@@ -1,0 +1,72 @@
+.signin-container {
+    min-height: 100vh;
+    background: url("C:\Users\MSI\Desktop\proth\dentaire\public\dental-chair.jpg") no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .signin-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: rgba(239, 246, 255, 0.85);
+    padding: 2rem;
+    border-radius: 12px;
+  }
+  
+  
+  .signin-form {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    text-align: center;
+  }
+  
+  .signin-form h2 {
+    margin-bottom: 1.5rem;
+    color: #004080;
+  }
+  
+  .signin-form input {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+  }
+  
+  .signin-form button {
+    background-color: #004080;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signin-form button:hover {
+    background-color: #002d66;
+  }
+  
+  .signin-links {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+  
+  .signin-links a {
+    color: #004080;
+    text-decoration: none;
+  }
+  
+  .signin-links a:hover {
+    text-decoration: underline;
+  }
+  
