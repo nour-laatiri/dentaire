@@ -254,6 +254,20 @@
   transform: none;
   box-shadow: none;
 }
+@media print {
+  .print-content, .print-content * {
+    visibility: visible;
+  }
+  .print-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+  .no-print {
+    display: none !important;
+  }
+}
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
