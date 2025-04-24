@@ -27,12 +27,9 @@ function App() {
           <Route path="/PatientInfoPage" element={<PatientInfoPage />} />
           <Route path="/FormDePredictionMax" element={<FormDePredictionMax />} />
           <Route path="/FormDePredictionMand" element={<FormDePredictionMand />} />
-<<<<<<< HEAD
-          
-          
-=======
           <Route path="/DeepLearning" element={<DeepLearning />} />
->>>>>>> 00d72c975d4ccf94abd77242a11d591b6783cd63
+          
+          
         </Routes>
       </div>
       <Footer/>
