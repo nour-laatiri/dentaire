@@ -1,109 +1,131 @@
 .service-container {
-    padding: 120px 1rem 2rem;
-    max-width: 1470px;
-    
-    margin: 0 auto;
-  }
-  
+  padding: 120px 1rem 2rem;
+  max-width: 1470px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.service-container h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #1E3A8A;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 480px) {
   .service-container h1 {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #1E3A8A;
-    margin-bottom: 2rem;
+      font-size: 2.25rem;
   }
-  
+}
+
+@media (min-width: 768px) {
+  .service-container h1 {
+      font-size: 2.5rem;
+  }
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  background-color: rgba(239, 246, 255, 0.85);
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 100%;
+}
+
+@media (min-width: 480px) {
   .services-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    background-color: rgba(239, 246, 255, 0.85);
-    padding: 2rem;
-    border-radius: 12px;
+      padding: 2rem;
   }
-  
-  @media (min-width: 768px) {
-    .services-grid {
+}
+
+@media (min-width: 768px) {
+  .services-grid {
       grid-template-columns: repeat(2, 1fr);
-    }
   }
-  
-  @media (min-width: 1024px) {
-    .services-grid {
+}
+
+@media (min-width: 1024px) {
+  .services-grid {
       grid-template-columns: repeat(4, 1fr);
       padding: 4rem;
-    }
   }
-  
-  .service-card {
-    background: white;
-    padding: 1rem;
-    width: 600px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease;
-  }
-  
-  .service-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .service-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .service-card h3 {
-    color: #3B82F6;
-    margin-bottom: 1rem;
-  }
-  
-  .service-card p {
-    color: #1E3A8A;
-    line-height: 1.6;
-    align-self: center;
-  }
-/* Add these styles to your existing Service.css */
+}
 
+.service-card {
+  background: white;
+  padding: 1rem;
+  width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+.service-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.service-card h3 {
+  color: #3B82F6;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.service-card p {
+  color: #1E3A8A;
+  line-height: 1.6;
+  align-self: center;
+  font-size: 1rem;
+}
+
+/* Prediction buttons styles - unchanged except for responsive adjustments */
 .prediction-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 1.5rem;
-    justify-content: center;
-  }
-  
-  .prediction-btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 20px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-  }
-  
-  .ml-btn {
-    background-color: #4a8fe7;
-    color: white;
-  }
-  
-  .ml-btn:hover {
-    background-color: #3a7bd5;
-    transform: translateY(-2px);
-  }
-  
-  .dl-btn {
-    background-color: #e77f4a;
-    color: white;
-  }
-  
-  .dl-btn:hover {
-    background-color: #d66f3a;
-    transform: translateY(-2px);
-  }
-  
-  .service-card {
-    position: relative;
-    align-content: center;
-    padding-bottom: 2.5rem; /* Add space for buttons */
-  }
+  display: flex;
+  gap: 10px;
+  margin-top: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.prediction-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.ml-btn {
+  background-color: #4a8fe7;
+  color: white;
+}
+
+.ml-btn:hover {
+  background-color: #3a7bd5;
+  transform: translateY(-2px);
+}
+
+.dl-btn {
+  background-color: #e77f4a;
+  color: white;
+}
+
+.dl-btn:hover {
+  background-color: #d66f3a;
+  transform: translateY(-2px);
+}
+
+.service-card {
+  position: relative;
+  align-content: center;
+  padding-bottom: 2.5rem;
+}
