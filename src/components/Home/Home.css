@@ -72,6 +72,11 @@
   border: 4px solid rgb(42, 42, 42);
   border-radius: 8px;
 }
+@media (min-width: 600px) {
+  .illustration {
+    height: 450px;
+  }
+}
 .learn-more {
   padding: 0.75rem 2rem;
   background-color: #3B82F6;
