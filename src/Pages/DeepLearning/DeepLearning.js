@@ -56,9 +56,9 @@ export default function DeepLearning() {
     
     <div className="deep-learning-page">
         <header className="header">
-        <Link to="/" className="logo-text">PROTHEA</Link>
+        <Link to="/home" className="logo-text">PROTHEA</Link>
         <nav className="nav">
-          <Link to="/">Accueil</Link>
+          <Link to="/home">Accueil</Link>
           <Link to="/about">À propos</Link>
           <Link to="/service">Services</Link>
           <Link to="/contact">Contact</Link>
