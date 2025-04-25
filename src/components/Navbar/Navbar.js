@@ -5,19 +5,17 @@ import "./Navbar.css";
 export default function Navbar() {
   return (
     <header className="header">
-      <Link to="/" className="logo">
+      <Link to="/home" className="logo">
         PROTHEA
       </Link>
       <nav className="nav">
-        <Link to="/">Accueil</Link>
-        <Link to="/about">À propos</Link>
-        <Link to="/service">Services</Link>
-        <Link to="/contact">Contact</Link>
+        <div className="nav-center">
+          <Link to="/home">Accueil</Link>
+          <Link to="/about">À propos</Link> {/* Moved inside nav-center */}
+          <Link to="/service">Services</Link>
+          <Link to="/contact">Contact</Link>
+        </div>
       </nav>
-      <div className="buttons">
-        <Link to="/signin" className="signin">Connexion</Link>
-        <Link to="/signup" className="signup">Inscription</Link>
-      </div>
     </header>
   );
 }

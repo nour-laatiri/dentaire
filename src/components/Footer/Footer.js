@@ -15,7 +15,7 @@ export default function Footer() {
         <div className="footer-section">
           <h4>Liens rapides</h4>
           <ul>
-            <li><Link to="/">Accueil</Link></li>
+            <li><Link to="/home">Accueil</Link></li>
             <li><Link to="/about">À propos</Link></li>
             <li><Link to="/service">Services</Link></li>
             <li><Link to="/contact">Contact</Link></li>

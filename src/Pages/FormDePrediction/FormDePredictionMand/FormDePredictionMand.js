@@ -119,17 +119,13 @@ export default function PredictionFormPage() {
   return (
     <div className="dental-page">
       <header className="header">
-        <Link to="/" className="logo-text">PROTHEA</Link>
+        <Link to="/home" className="logo-text">PROTHEA</Link>
         <nav className="nav">
-          <Link to="/">Accueil</Link>
+          <Link to="/home">Accueil</Link>
           <Link to="/about">À propos</Link>
           <Link to="/service">Services</Link>
           <Link to="/contact">Contact</Link>
         </nav>
-        <div className="buttons">
-          <button className="signup">Inscription</button>
-          <button className="signin">Connexion</button>
-        </div>
       </header>
 
       <main className="form-page-container">

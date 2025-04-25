@@ -13,19 +13,32 @@
   /* === HEADER STYLES === */
   /* ===================== */
 
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    background-color: #a7cdf1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
   
   .logo-text {
     font-size: 1.75rem;
     font-weight: bold;
     color: #3B82F6;
     text-decoration: none;
-    margin-right: 2rem;
   }
   
   .nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     gap: 1.5rem;
-    margin: 1rem 0;
   }
   
   .nav a {
@@ -39,11 +52,25 @@
     color: #3B82F6;
   }
   
-  .buttons {
-    display: flex;
-    gap: 0.75rem;
+  /* Optional: Add responsive behavior */
+  @media (max-width: 768px) {
+    .header {
+      flex-direction: column;
+      padding: 1rem;
+    }
+    
+    .logo-text {
+      margin-bottom: 1rem;
+    }
+    
+    .nav {
+      position: static;
+      transform: none;
+      left: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
-  
   
   
   /* ======================= */

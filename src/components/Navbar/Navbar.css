@@ -1,87 +1,68 @@
 .header {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 1470px;
-    z-index: 1000;
-    background-color: #a7cdf1;
-    padding: 1.5rem;
-    display: flex;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1470px;
+  z-index: 1000;
+  background-color: #a7cdf1;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #3B82F6;
+  text-decoration: none;
+  white-space: nowrap; /* Prevent logo from breaking */
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-center {
+  display: flex;
+  gap: 1.5rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap; /* This ensures "À propos" stays on one line */
+}
+
+.nav a {
+  text-decoration: none;
+  color: #0b0b0b;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: #3B82F6;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .header {
     flex-direction: column;
     gap: 1rem;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
   }
   
-  @media (min-width: 640px) {
-    .header {
-      flex-direction: row;
-    }
+  .nav-center {
+    position: static;
+    transform: none;
+    flex-wrap: wrap;
+    justify-content: center;
   }
   
   .logo {
-    font-size: 1.75rem;
-    font-weight: bold;
-    color: #3B82F6;
-    text-decoration: none;
+    margin-bottom: 0.5rem;
   }
-  
-  .nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: center;
-  }
-  
-  @media (min-width: 640px) {
-    .nav {
-      flex-direction: row;
-      gap: 1.5rem;
-    }
-  }
-  
-  .nav a {
-    text-decoration: none;
-    color: #0b0b0b;
-    transition: color 0.3s ease;
-  }
-  
-  .nav a:hover {
-    color: #3B82F6;
-  }
-  
-  .buttons {
-    display: flex;
-    gap: 0.75rem;
-  }
-  
-  .signup {
-    padding: 0.5rem 1rem;
-    border: 2px solid #060606;
-    color: #000000;
-    background-color: transparent;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .signup:hover {
-    background-color: #DBEAFE;
-  }
-  
-  .signin {
-    padding: 0.5rem 1rem;
-    background-color: #020202;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .signin:hover {
-    background-color: #2563EB;
-  }
+}
