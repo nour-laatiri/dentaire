@@ -32,7 +32,7 @@ function App() {
     <Router basename={process.env.PUBLIC_URL}>
       <Routes>
         {/* Redirect root path to /Signin */}
-        <Route path="/" element={<Navigate to="/Signin" replace />} />
+        <Route path="/" element={<Navigate to="/" replace />} />
 
         {/* Auth routes without Layout */}
         <Route path="/Signin" element={<Signin />} />
