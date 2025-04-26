@@ -36,7 +36,7 @@ export default function Signup() {
         await doSendEmailVerification();
         
         // Navigate to home page after successful registration
-        navigate("/home"); // or navigate("/home") if you prefer
+        navigate("/home"); 
       } catch (error) {
         setError(error.message);
         setIsRegistering(false);

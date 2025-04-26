@@ -13,20 +13,39 @@ import FormDePredictionMand from "./Pages/FormDePrediction/FormDePredictionMand/
 import FormDePredictionMax from "./Pages/FormDePrediction/FormDePredictionMax/FormDePredictionMax";
 import DeepLearning from "./Pages/DeepLearning/DeepLearning";
 import "./App.css";
+const ProtectedRoute = ({ children }) => {
+  // Check if user is authenticated (you'll need to implement your actual auth check)
+  const isAuthenticated = localStorage.getItem('isAuthenticated'); // Example using localStorage
+  
+  if (!isAuthenticated) {
+    // If not authenticated, redirect to signin page
+    return <Navigate to="/Signin" replace />;
+  }
+  
+  // If authenticated, render the children (the protected page)
+  return children;
+};
+
 
 function App() {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Routes>
         {/* Redirect root path to /Signin */}
-        <Route path="/" element={<Navigate to="/Signin" replace />} />
+        <Route path="/" element={<Navigate to="/" replace />} />
 
         {/* Auth routes without Layout */}
         <Route path="/Signin" element={<Signin />} />
         <Route path="/Signup" element={<Signup />} />
 
-        {/* Protected routes with Layout (only accessible after login) */}
-        <Route element={<Layout />}>
+        {/* All protected routes wrapped in ProtectedRoute */}
+        <Route 
+          element={
+            <ProtectedRoute>
+              <Layout />
+            </ProtectedRoute>
+          }
+        >
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/service" element={<Service />} />
@@ -41,5 +60,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;
