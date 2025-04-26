@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link , useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../FormDePredictionMand/FormDePredictionMand.css";
 
 export default function PredictionFormPage() {
+  const navigate = useNavigate();
+
   const location = useLocation();
   const [patientData, setPatientData] = useState(null);
   const [predictionType, setPredictionType] = useState('');
@@ -18,6 +20,15 @@ export default function PredictionFormPage() {
   });
   const [prediction, setPrediction] = useState(null);
   const [modifications, setModifications] = useState([]);
+  const handleSignOut = () => {
+    // Clear the authentication flag
+    localStorage.removeItem('isAuthenticated');  // <-- THIS IS THE CRUCIAL ADDITION
+    
+    // Replace the current entry in history stack with signin page
+    navigate('/Signin', { replace: true });  // Changed from '/' to '/Signin' to match your routes
+    
+    // Optional: Clear any user data from state/context here
+  };
 
   useEffect(() => {
     if (location.state) {
@@ -126,6 +137,10 @@ export default function PredictionFormPage() {
           <Link to="/service">Services</Link>
           <Link to="/contact">Contact</Link>
         </nav>
+        <button className="signout"onClick={handleSignOut}>
+          deconnecter 
+
+          </button>
       </header>
 
       <main className="form-page-container">

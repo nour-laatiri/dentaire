@@ -4,6 +4,16 @@ import "../FormPatient/FormPatient.css";
 
 export default function PatientFormPage() {
   const navigate = useNavigate();
+   
+  const handleSignOut = () => {
+    // Clear the authentication flag
+    localStorage.removeItem('isAuthenticated');  // <-- THIS IS THE CRUCIAL ADDITION
+    
+    // Replace the current entry in history stack with signin page
+    navigate('/Signin', { replace: true });  // Changed from '/' to '/Signin' to match your routes
+    
+    // Optional: Clear any user data from state/context here
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,6 +49,10 @@ export default function PatientFormPage() {
           <Link to="/service">Services</Link>
           <Link to="/contact">Contact</Link>
         </nav>
+        <button className="signout"onClick={handleSignOut}>
+          deconnecter 
+
+          </button>
       </header>
 
       <main className="form-page-container">

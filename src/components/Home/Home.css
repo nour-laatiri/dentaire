@@ -58,10 +58,11 @@
 .illustration {
   margin-top: 60px;
   margin-bottom: 20px;
-  margin-left: 40px;
+  margin-left: 0px;
   position: relative;
   flex: 1;
-  height: 450px;
+  height: 500px;
+  box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.2);
   background-image: url("../../../public/try4.webp");
   background-size: cover; /* Ensures the image fills the container, touching the frame */
   

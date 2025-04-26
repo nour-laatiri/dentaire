@@ -13,15 +13,10 @@ export default function Service() {
       color: "#3a7bd5",
       predictionMethods: [
         {
-          name: "Par Informations Cliniques",
+          name: "Par Informations Cliniques et Par Analyse d'Images",
           type: "mandibulaire-ml",
-          description: "Analyse des données cliniques du patient pour prédire l'équilibre"
+          description: "Analyse des données cliniques du patient pour prédire l'équilibre et par Traitement d'images intra-orales par réseaux neuronaux profonds"
         },
-        {
-          name: "Par Analyse d'Images",
-          type: "mandibulaire-dl",
-          description: "Traitement d'images intra-orales par réseaux neuronaux profonds"
-        }
       ]
     },
     {
@@ -31,18 +26,12 @@ export default function Service() {
       color: "#00d2ff",
       predictionMethods: [
         {
-          name: "Par Informations Cliniques",
+          name: "Par Informations Cliniques et Par Analyse d'Images",
           type: "maxillaire-ml",
-          description: "Utilisation des paramètres anatomiques et fonctionnels"
+          description: "Utilisation des paramètres anatomiques et fonctionnels et par Reconnaissance d'images 3D des arcades dentaires"
         },
-        {
-          name: "Par Analyse d'Images",
-          type: "maxillaire-dl",
-          description: "Reconnaissance d'images 3D des arcades dentaires"
-        }
       ]
     },
-  
   ];
 
   const handlePredictionClick = (type) => {
@@ -82,7 +71,7 @@ export default function Service() {
                     <h4>{method.name}</h4>
                     <p className="method-description">{method.description}</p>
                     <button
-                      className={`prediction-btn ${method.type.includes('ml') ? 'ml-btn' : 'dl-btn'}`}
+                      className="prediction-btn ml-btn"
                       onClick={() => handlePredictionClick(method.type)}
                     >
                       Commencer l'analyse
