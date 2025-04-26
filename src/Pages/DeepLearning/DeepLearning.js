@@ -6,7 +6,7 @@ import "../DeepLearning/DeepLearning.css";
 
 export default function DeepLearning() {
   const location = useLocation();
-  const navigate = useNavigate();
+      const navigate = useNavigate();
   const [prediction, setPrediction] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -14,6 +14,16 @@ export default function DeepLearning() {
   const patientData = location?.state?.patientData;
   const image = location?.state?.image;
   const imageFile = location?.state?.imageFile;
+  
+  const handleSignOut = () => {
+    // Clear the authentication flag
+    localStorage.removeItem('isAuthenticated');  // <-- THIS IS THE CRUCIAL ADDITION
+    
+    // Replace the current entry in history stack with signin page
+    navigate('/Signin', { replace: true });  // Changed from '/' to '/Signin' to match your routes
+    
+    // Optional: Clear any user data from state/context here
+  };
 
   const handleBack = () => {
     navigate(-1); // Go back to previous page
@@ -63,16 +73,16 @@ export default function DeepLearning() {
           <Link to="/service">Services</Link>
           <Link to="/contact">Contact</Link>
         </nav>
-        <div className="buttons">
-          <button className="signup">Inscription</button>
-          <button className="signin">Connexion</button>
-        </div>
+        <button className="signout"onClick={handleSignOut}>
+          deconnecter 
+
+          </button>
       </header>
       <button onClick={handleBack} className="back-button">
         &larr; Retour
       </button>
 
-      <h1>Analyse Deep Learning</h1>
+      <h1>Analyse par image</h1>
       
       {patientData && (
         <div className="patient-summary">

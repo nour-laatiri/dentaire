@@ -37,6 +37,28 @@
     border: 1px solid #ccc;
     border-radius: 0.5rem;
   }
+  .error-message {
+    color: #d32f2f; /* Red color for errors */
+    background-color: #fde8e8; /* Light red background */
+    padding: 10px 15px; /* Spacing inside the box */
+    border-radius: 4px; /* Rounded corners */
+    border: 1px solid #ef9a9a; /* Light red border */
+    margin: 10px 0; /* Space above and below */
+    font-size: 14px; /* Readable text size */
+    font-family: Arial, sans-serif; /* Clean font */
+    display: inline-block; /* Fits content width */
+    max-width: 100%; /* Prevents overflow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    animation: fadeIn 0.3s ease-in-out forwards;
+    opacity: 0;
+  }
+  
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
   
   .signin-form button {
     background-color: #004080;

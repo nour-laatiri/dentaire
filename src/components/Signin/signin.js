@@ -12,7 +12,16 @@ const SignIn = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
+  const getFriendlyErrorMessage = (errorCode) => {
+    switch (errorCode) {
+      case "auth/invalid-credential": // Emulator or some configurations
+      case "auth/user-not-found":
+      case "auth/wrong-password":
+        return 'Adresse email ou mot de passe est invalide '; // Generic message
+      default:
+        return 'Une erreur est survenue. Veuillez réessayer';
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -20,15 +29,17 @@ const SignIn = () => {
     
     try {
       await doSignInUserWithEmailAndPassword(email, password);
+      
+      // ADDED THIS LINE TO SET AUTHENTICATION FLAG
+      localStorage.setItem('isAuthenticated', 'true');  // <--- THIS IS THE CRUCIAL ADDITION
+      
       navigate("/home"); // Redirect to home after successful login
     } catch (err) {
-      setError(err.message);
+      setError(getFriendlyErrorMessage(err.code));
     } finally {
       setIsLoading(false);
     }
   };
-
-  
 
   const handlePasswordReset = async () => {
     if (!email) {
