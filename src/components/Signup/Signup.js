@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Signup.css";
 
 export default function Signup() {
@@ -11,6 +11,7 @@ export default function Signup() {
   });
 
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -26,50 +27,83 @@ export default function Signup() {
     }
 
     console.log("Formulaire validé :", form);
-    // ici tu peux faire un appel à Firebase ou autre service d'inscription
+    navigate('/'); // Rediriger vers l'accueil après inscription
   };
 
   return (
     <div className="signup-container">
-      <h2>Créer un compte</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Nom complet"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Adresse email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Mot de passe"
-          value={form.password}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirmer le mot de passe"
-          value={form.confirmPassword}
-          onChange={handleChange}
-          required
-        />
+      <div className="signup-card">
+        <div className="signup-form">
+          <h1>Créer un compte sur PROTHEA</h1>
+          <p className="subtitle">Entrez vos informations ci-dessous.</p>
 
-        {error && <p className="error">{error}</p>}
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="name">Nom complet</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Entrez votre nom complet"
+                value={form.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-        <button type="submit">S'inscrire</button>
-      </form>
+            <div className="form-group">
+              <label htmlFor="email">Adresse email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Entrez votre adresse email"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Mot de passe</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Entrez votre mot de passe"
+                value={form.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirmer mot de passe</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirmez votre mot de passe"
+                value={form.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            {error && <p className="error-message">{error}</p>}
+
+            <button type="submit" className="signup-btn">S'inscrire</button>
+          </form>
+
+          <div className="have-account">
+            Déjà un compte ? <a href="/signin">Connectez-vous ici</a>
+          </div>
+        </div>
+      </div>
+
+      <div className="signup-image">
+        <img src="/dental-chair.jpg" alt="Dental Chair" />
+      </div>
     </div>
   );
 }
