@@ -74,7 +74,7 @@ export default function DeepLearning() {
           <Link to="/contact">Contact</Link>
         </nav>
         <button className="signout"onClick={handleSignOut}>
-          deconnecter 
+        Deconnexion
 
           </button>
       </header>

@@ -140,7 +140,7 @@ export default function PredictionFormPage() {
           <Link to="/contact">Contact</Link>
         </nav>
         <button className="signout"onClick={handleSignOut}>
-          deconnecter 
+        Deconnexion
 
           </button>
       </header>

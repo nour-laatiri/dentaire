@@ -32,7 +32,7 @@ export default function Navbar() {
       </nav>
       
           <button className="signout"onClick={handleSignOut}>
-          deconnecter 
+          Deconnexion
 
           </button>
         

@@ -50,7 +50,7 @@ export default function PatientFormPage() {
           <Link to="/contact">Contact</Link>
         </nav>
         <button className="signout"onClick={handleSignOut}>
-          deconnecter 
+        Deconnexion
 
           </button>
       </header>
