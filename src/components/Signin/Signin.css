@@ -1,95 +1,129 @@
 .signin-container {
-    min-height: 100vh;
-    background: url("C:\Users\clien\Desktop\nourpartage\dentaire\public\dental-chair.jpg") no-repeat center center/cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  min-height: 100vh;
+  background: url("../../../public/PPA.jpeg") no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.signin-card {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  padding: 40px;
+  text-align: center;
+}
+
+.welcome-section {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.welcome-section h1 {
+  color: #004080;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.welcome-section p {
+  color: #555;
+  font-size: 16px;
+  margin: 0;
+}
+
+.signin-form h2 {
+  color: #004080;
+  font-size: 22px;
+  margin-bottom: 25px;
+}
+
+.signin-form input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.signin-form button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  background-color: #004080;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.signin-form button[type="submit"]:hover {
+  background-color: #002d66;
+}
+
+
+
+.oauth-providers {
+  margin: 20px 0;
+}
+.google-signin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0.8rem;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.google-signin-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.signin-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.text-link, .signin-footer a {
+  color: #004080;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.95rem;
+}
+
+.text-link:hover, .signin-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
   .signin-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    background-color: rgba(239, 246, 255, 0.85);
     padding: 2rem;
-    border-radius: 12px;
+    width: 95%;
   }
-  
   
   .signin-form {
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 2rem 2.5rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    text-align: center;
+    padding: 2rem;
   }
   
-  .signin-form h2 {
-    margin-bottom: 1.5rem;
-    color: #004080;
+  .welcome-card h1 {
+    font-size: 1.5rem;
   }
-  
-  .signin-form input {
-    display: block;
-    width: 100%;
-    margin-bottom: 1rem;
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-  }
-  .error-message {
-    color: #d32f2f; /* Red color for errors */
-    background-color: #fde8e8; /* Light red background */
-    padding: 10px 15px; /* Spacing inside the box */
-    border-radius: 4px; /* Rounded corners */
-    border: 1px solid #ef9a9a; /* Light red border */
-    margin: 10px 0; /* Space above and below */
-    font-size: 14px; /* Readable text size */
-    font-family: Arial, sans-serif; /* Clean font */
-    display: inline-block; /* Fits content width */
-    max-width: 100%; /* Prevents overflow */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    animation: fadeIn 0.3s ease-in-out forwards;
-    opacity: 0;
-  }
-  
-
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
 }
-  
-  .signin-form button {
-    background-color: #004080;
-    color: white;
-    border: none;
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    margin-bottom: 4px;
-    width: 100%;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .signin-form button:hover {
-    background-color: #002d66;
-  }
-  
-  .signin-links {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-  }
-  
-  .signin-links a {
-    color: #004080;
-    text-decoration: none;
-  }
-  
-  .signin-links a:hover {
-    text-decoration: underline;
-  }
-  

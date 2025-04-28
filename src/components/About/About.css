@@ -46,7 +46,7 @@
   .about-image {
     flex: 1;
     min-height: 400px;
-    background-image: url('../../../public/prothese-dentaire.jpeg');
+    background-image: url('../../../public/OIP.jpg');
     background-size: cover;
     background-position: center;
     border-radius: 8px;
