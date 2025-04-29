@@ -28,7 +28,7 @@ export default function Service() {
         {
           name: "Par Informations Cliniques et Par Analyse d'Images",
           type: "maxillaire-ml",
-          description: "Utilisation des paramètres anatomiques et fonctionnels et par Reconnaissance d'images 3D des arcades dentaires"
+          description: "Utilisation des paramètres anatomiques et fonctionnels et par Reconnaissance d'images des arcades dentaires"
         },
       ]
     },

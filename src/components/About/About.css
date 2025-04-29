@@ -50,4 +50,7 @@
     background-size: cover;
     background-position: center;
     border-radius: 8px;
+    border: 2px solid #7db3f1; /* Added blew border */
+    width: 100%;
+    box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.2);
   }
