@@ -35,17 +35,17 @@
 }
 
 .info-page {
-  background-color: #a7cdf1;;
-  padding: 7rem;
-  border-radius: 12px;
-  width: 720px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background-color: #a7cdf1;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .patient-info-card {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2rem
+;
 }
 
 .patient-details {
@@ -117,8 +117,8 @@
 
 .upload-btn {
   padding: 0.75rem 1.5rem;
-  background-color: #6a93e1;
-  color: #333;
+  background-color: #0e234b;
+  color: #fbf9f9;
   border-radius: 8px;
   cursor: pointer;
 }

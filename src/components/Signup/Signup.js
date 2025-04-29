@@ -15,6 +15,14 @@ export default function Signup() {
   const [error, setError] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
   const navigate = useNavigate();
+  const getFriendlyErrorMessage = (errorCode) => {
+    switch (errorCode) {
+      case "auth/email-already-in-use":
+        return 'Un compte existe déjà avec cette adresse e-mail';
+      default:
+        return 'Une erreur est survenue. Veuillez réessayer';
+      }
+    };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -35,8 +43,8 @@ export default function Signup() {
         await doCreateUserWithEmailAndPassword(form.email, form.password);
         await doSendEmailVerification();
         navigate("/home"); 
-      } catch (error) {
-        setError(error.message);
+      } catch (err) {
+        setError(getFriendlyErrorMessage(err.code));
         setIsRegistering(false);
       }
     }
