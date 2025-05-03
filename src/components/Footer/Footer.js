@@ -31,7 +31,7 @@ export default function Footer() {
       </div>
       
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} PROTHEQ. Tous droits réservés.</p>
+        <p>&copy; {new Date().getFullYear()} PROTEQ. Tous droits réservés.</p>
       </div>
     </footer>
   );

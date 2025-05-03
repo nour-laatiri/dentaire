@@ -1,30 +1,73 @@
-/* Services.css - With right-side image and no horizontal scrolling */
+/* Services.css - With animations */
 .service-container {
-  padding: 120px 1rem 2rem;
+  padding: 120px 2rem 2rem;
   max-width: 1470px;
   margin: 0 auto;
   width: 100%;
   box-sizing: border-box;
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .service-container h1 {
   text-align: center;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #1E3A8A;
   margin-bottom: 2rem;
-  padding: 0 1rem;
+  position: relative;
+  animation: slideInDown 0.6s ease-out 0.2s both;
 }
 
-@media (min-width: 480px) {
-  .service-container h1 {
-    font-size: 2.25rem;
-  }
+@keyframes slideInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@media (min-width: 768px) {
-  .service-container h1 {
-    font-size: 2.5rem;
-  }
+.service-container h1::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: #3B82F6;
+  margin: 1rem auto 0;
+  border-radius: 2px;
+  animation: underlineGrow 0.6s ease-out 0.8s both;
+}
+
+@keyframes underlineGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.subtitle {
+  text-align: center;
+  color: #1E3A8A;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  animation: fadeIn 0.6s ease-out 0.4s both;
+}
+
+.dental-illustration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  animation: fadeInUp 0.6s ease-out 0.6s both;
+}
+
+.tooth-icon {
+  font-size: 2rem;
+  margin: 0 1rem;
+}
+
+.force-arrows {
+  font-size: 1.5rem;
+  color: #3B82F6;
 }
 
 .service-content {
@@ -34,12 +77,19 @@
   background-color: rgba(239, 246, 255, 0.85);
   padding: 2rem;
   border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (min-width: 1024px) {
   .service-content {
     flex-direction: row;
-    padding: 3rem;
+    padding: 4rem;
   }
 }
 
@@ -57,55 +107,97 @@
   }
 }
 
-.service-image {
-  display: none; /* Hidden on mobile */
-}
-
-@media (min-width: 1024px) {
-  .service-image {
-    display: block;
-    flex: 1;
-    min-height: 500px;
-    background-image: url('../../../public/denture2.jpeg'); /* Update with your image path */
-    background-size: cover;
-    background-position: center;
-    border-radius: 8px;
-    margin-left: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-}
-
 .service-card {
   background: white;
   padding: 1.5rem;
-  width: 100%;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
   box-sizing: border-box;
+  animation: fadeIn 0.6s ease-out var(--delay) both;
+  position: relative;
+  overflow: hidden;
 }
 
 .service-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(59, 130, 246, 0.2);
+}
+
+.service-card:nth-child(1) {
+  --delay: 0.6s;
+}
+.service-card:nth-child(2) {
+  --delay: 0.8s;
+}
+
+.card-header {
+  margin-bottom: 1.5rem;
 }
 
 .service-icon {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
 .service-card h3 {
   color: #3B82F6;
   margin-bottom: 1rem;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.service-card h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: rgba(59, 130, 246, 0.3);
+  border-radius: 3px;
 }
 
 .service-card p {
   color: #1E3A8A;
   line-height: 1.6;
-  font-size: 1rem;
-  padding: 0 0.5rem;
+  margin: 1rem 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.prediction-methods {
+  margin-top: 1.5rem;
+  animation: fadeIn 0.6s ease-out 0.8s both;
+}
+
+.method-card {
+  background: rgba(239, 246, 255, 0.7);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.method-card h4 {
+  color: #1E3A8A;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.method-description {
+  font-size: 0.9rem;
+  color: #1E3A8A;
+  opacity: 0.8;
+  margin-bottom: 1rem;
 }
 
 .prediction-buttons {
@@ -117,27 +209,127 @@
 }
 
 .prediction-btn {
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 20px;
+  border-radius: 30px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 0.9rem;
+  font-size: 1rem;
   white-space: nowrap;
+  position: relative;
+  overflow: hidden;
 }
 
 .ml-btn {
-  background-color: #4a8fe7;
+  background-color: #3B82F6;
   color: white;
 }
 
 .ml-btn:hover {
-  background-color: #3a7bd5;
-  transform: translateY(-2px);
+  background-color: #2563EB;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
 }
 
-/* Responsive adjustments */
+.ml-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.ml-btn:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20, 20);
+    opacity: 0;
+  }
+}
+
+.service-image {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .service-image {
+    display: block;
+    flex: 1;
+    min-height: 500px;
+    background-image: url('../../../public/denture2.jpeg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    border: 2px solid #7db3f1;
+    box-shadow: 
+      0 25px 50px -12px rgba(59, 130, 246, 0.25),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+    animation: float 6s ease-in-out infinite, fadeInRight 0.8s ease-out 0.6s both;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    margin-left: 2rem;
+  }
+
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .service-image::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    left: 10%;
+    width: 80%;
+    height: 20px;
+    background: radial-gradient(ellipse at center, 
+      rgba(59,130,246,0.4) 0%, 
+      rgba(255,255,255,0) 80%);
+    filter: blur(10px);
+    opacity: 0.7;
+    animation: reflect 6s ease-in-out infinite;
+  }
+}
+
+.wave-decoration {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.25' fill='%233B82F6'%3E%3C/path%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5' fill='%233B82F6'%3E%3C/path%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='%233B82F6'%3E%3C/path%3E%3C/svg%3E");
+  background-size: cover;
+  opacity: 0.3;
+  animation: waveMove 10s linear infinite;
+}
+
+@keyframes waveMove {
+  0% { background-position-x: 0; }
+  100% { background-position-x: 1200px; }
+}
+
+@media (min-width: 768px) {
+  .service-container h1 {
+    font-size: 3rem;
+  }
+}
+
 @media (max-width: 767px) {
   .service-card {
     padding: 1rem;
