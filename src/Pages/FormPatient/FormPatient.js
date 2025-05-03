@@ -42,7 +42,7 @@ export default function PatientFormPage() {
   return (
     <div className="dental-page">
       <header className="header">
-        <Link to="/home" className="logo-text">PROTHEA</Link>
+        <Link to="/home" className="logo-text">PROTEQ</Link>
         <nav className="nav">
           <Link to="/home">Accueil</Link>
           <Link to="/about">À propos</Link>

@@ -15,13 +15,13 @@ label_encoders = pickle.load(open(r"C:\Users\clien\Desktop\nour1.1\react-predict
 
 # Define feature names in the correct order (should match training order)
 FEATURE_NAMES = [
-    'crete',
+    "crête",
     "forme de l'arcade",
-    'fibre muqueux',
-    'Frein labial',
-    'eminences',
-    'classe de kennedy',
-    'pp'
+    "fibro-muqueuse",
+    "Frein labial",
+    "eminences",
+    "Classe d'édentement",
+    "type de prothèse à envisager",
 ]
 
 @app.route('/predict', methods=['POST'])
@@ -32,13 +32,13 @@ def predict():
 
         # Prepare dictionary of input features
         input_dict = {
-            'crete': data['crete'],
+            'crête': data['crête'],
             "forme de l'arcade": data["forme de l'arcade"],
-            'fibre muqueux': data['fibre muqueux'],
+            'fibro-muqueuse': data['fibro-muqueuse'],
             'Frein labial': data['Frein labial'],
             'eminences': data['eminences'],
-            'classe de kennedy': data['classe de kennedy'],
-            'pp': data['pp']
+            "Classe d'édentement": data["Classe d'édentement"],
+            "type de prothèse à envisager": data["type de prothèse à envisager"]
         }
 
         print("Input Dict:", input_dict)
@@ -97,16 +97,16 @@ def predict():
             # Check for hypertrophic tuberosity
             
             # Check for resorbed ridge
-            if input_dict['crete'].lower() == 'résorbée':
-                modifications.append("Crête résorbée: faire un approfondissement du vestibule")
+            if input_dict['crête'].lower() in['résorbée','resorbee',"résorbé"] :
+                modifications.append("faire un approfondissement du vestibule")
             
             # Check for non-adherent or thick mucosa
-            if input_dict['fibre muqueux'].lower() in ['non adhérente', 'épaisse', 'hypertrophiée']:
-                modifications.append("Fibromuqueuse non adhérente/épaisse/hypertrophiée: faire un désépaississement muqueux")
+            if input_dict['fibro-muqueuse'].lower() in ['non adhérente', 'épaisse', 'hypertrophiée','hypertrophiee']:
+                modifications.append("faire un désépaississement muqueux")
             
             # Check for thin mucosa
-            if input_dict['fibre muqueux'].lower() == 'fine':
-                modifications.append("Fibromuqueuse fine: faire une empreinte anatomo-fonctionnelle avec un élastomère de faible viscosité")
+            if input_dict['fibro-muqueuse'].lower() == 'fine':
+                modifications.append("faire une empreinte anatomo-fonctionnelle avec un élastomère de faible viscosité")
             
             if modifications:
                 response["modifications"] = modifications

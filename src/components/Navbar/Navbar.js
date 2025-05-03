@@ -19,7 +19,7 @@ export default function Navbar() {
   return (
     <header className="header">
       <Link to="/home" className="logo">
-        PROTHEA
+      PROTEQ
       </Link>
       <nav className="nav">
         <div className="nav-center">

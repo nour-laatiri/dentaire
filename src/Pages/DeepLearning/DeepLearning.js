@@ -6,7 +6,7 @@ import "../DeepLearning/DeepLearning.css";
 
 export default function DeepLearning() {
   const location = useLocation();
-      const navigate = useNavigate();
+  const navigate = useNavigate();
   const [prediction, setPrediction] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -66,7 +66,7 @@ export default function DeepLearning() {
     
     <div className="deep-learning-page">
         <header className="header">
-        <Link to="/home" className="logo-text">PROTHEA</Link>
+        <Link to="/home" className="logo-text">PROTEQ</Link>
         <nav className="nav">
           <Link to="/home">Accueil</Link>
           <Link to="/about">À propos</Link>

@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-df=pd.read_csv(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\maxillaire(215 cas).csv")
+df=pd.read_csv(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\maxillaire(215 cas)(in) (2).csv")
 
 df.head()
 
@@ -73,7 +73,8 @@ print(y.value_counts(normalize=True))  # See class proportions
 
 # 9️⃣ Train Random Forest with class balancing
 from sklearn.ensemble import RandomForestClassifier
-rf_model = RandomForestClassifier(n_estimators=50, random_state=42, class_weight='balanced')
+rf_model = RandomForestClassifier(n_estimators=60, random_state=42, class_weight='balanced')
+
 rf_model.fit(X_train, y_train)
 
 from sklearn.metrics import accuracy_score
@@ -83,7 +84,20 @@ print(f"✅ Random Forest Accuracy with Class Balancing: {accuracy:.2f}")
 
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import seaborn as sns
+importances = rf_model.feature_importances_
+feature_names = X.columns
+importance_df = pd.DataFrame({
+    'Feature': feature_names,
+    'Importance': importances
+}).sort_values(by='Importance', ascending=False)
+plt.figure(figsize=(10, 6))
+sns.barplot(x='Importance', y='Feature', data=importance_df)
+plt.title('Feature Importances from Random Forest')
+plt.xlabel('Importance Score')
+plt.ylabel('Feature')
+plt.tight_layout()
+plt.show()
 
 # Check class distribution
 print(df['facteur du osteo-muqueux'].value_counts())
