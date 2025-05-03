@@ -55,7 +55,7 @@ export default function Signup() {
       <div className="signup-card">
         <div className="signup-form-container">
           <div className="signup-form">
-            <h1>Créer un compte sur PROTHEA</h1>
+            <h1>Créer un compte sur PROTEQ</h1>
             <p className="subtitle">Entrez vos informations ci-dessous.</p>
   
             <form onSubmit={handleSubmit}>

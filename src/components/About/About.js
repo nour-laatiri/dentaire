@@ -4,14 +4,13 @@ import "./About.css";
 export default function About() {
   return (
     <div className="about-container">
-      <h1>À propos de PROTHEA</h1>
+      <h1>À propos de PROTHEQ</h1>
       <div className="about-content">
         <div className="about-text">
           <h2>Notre Mission</h2>
           <p>
-            Chez PROTHEA, nous nous engageons à révolutionner le domaine des
-            prothèses dentaires grâce à des technologies de pointe et une
-            approche centrée sur le patient.
+            Chez PROTEQ, notre mission est d'optimiser le traitement des patients par des prothèses partielles amovibles
+             grâce à une prédiction des problèmes d'équilibre qui peuvent exister et une proposition des solutions qui peuvent être envisager.
           </p>
           
           <h2>Notre Équipe</h2>

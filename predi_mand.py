@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-df=pd.read_csv(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\cleaned_mandibule (50 cas).xlsx - cleaned_mandibule (1).csv")
+df=pd.read_csv(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\mandibule(ihope).csv")
 
 df.head()
 
@@ -51,7 +51,7 @@ for col in categorical_columns:
     X[col] = le.fit_transform(X[col])
     label_encoders[col] = le
 
-zero_not_accepted=["crete", "forme de l'arcade", "fibre muqueux", "Frein labial","eminences", "classe de kennedy", "pp"]
+zero_not_accepted=["crête", "forme de l'arcade", "fibro-muqueuse", "Frein labial","eminences", "Classe d'édentement", "type de prothèse à envisager"]
 for column in zero_not_accepted:
     X[column] = X[column].replace(0, np.nan)
     mean= int(X[column].mean(skipna=True))
@@ -88,14 +88,16 @@ params = {
     'num_class': 3,              # Specify the number of classes
     'eval_metric': 'mlogloss',     # Use mlogloss for multi-class
     'eta': 0.1,                     # learning rate
-    'max_depth': 6,                 # maximum depth of a tree
+    'max_depth': 20,                 # maximum depth of a tree
     'subsample': 0.8,               # percentage of samples used per tree
     'colsample_bytree': 0.8,        # percentage of features used per tree
     'seed': 42                      #
 }
 
 # Train the model
-num_rounds = 80
+num_rounds = 90
+
+
 
 # number of boosting rounds
 model = xgb.train(params, dtrain, num_rounds)
@@ -110,7 +112,7 @@ from sklearn.metrics import accuracy_score
 dtest_pred = xgb.DMatrix(X_test)
 y_pred = model.predict(dtest_pred)  # Use DMatrix for prediction
 accuracy = accuracy_score(y_test, y_pred)
-print(f"✅ Random Forest Accuracy with Class Balancing: {accuracy:.2f}")
+print(f"✅ XGBOOST Accuracy: {accuracy:.2f}")
 
 import pandas as pd
 import matplotlib.pyplot as plt

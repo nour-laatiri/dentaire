@@ -41,9 +41,9 @@ export default function Service() {
   return (
     <div className="service-container">
       <div className="service-header">
-        <h1>Prédiction d'Équilibre des Prothèses Amovibles</h1>
+        <h1>prédiction précise de l'équilibre des prothèses partielles amovibles</h1>
         <p className="subtitle">
-          Deux approches innovantes: Analyse par données cliniques (Machine Learning) ou par imagerie dentaire (Deep Learning)
+          Deux approches innovantes: Analyse par données cliniques (L'apprentissage automatique) ou par imagerie dentaire (L'apprentissage profond)
         </p>
         <div className="dental-illustration">
           <div className="tooth-icon">🦷</div>

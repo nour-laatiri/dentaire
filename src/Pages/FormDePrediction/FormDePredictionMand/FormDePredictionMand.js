@@ -10,13 +10,13 @@ export default function PredictionFormPage() {
   const [patientData, setPatientData] = useState(null);
   const [predictionType, setPredictionType] = useState('');
   const [formData, setFormData] = useState({
-    crete: "",
+    crête: "",
     "forme de l'arcade": "",
-    "fibre muqueux": "",
+    "fibro-muqueuse": "",
     "Frein labial": "",
     eminences:"",
-    "classe de kennedy": "",
-    pp: "",
+    "Classe d'édentement": "",
+    "type de prothèse à envisager": "",
   });
   const [prediction, setPrediction] = useState(null);
   const [modifications, setModifications] = useState([]);
@@ -130,7 +130,7 @@ export default function PredictionFormPage() {
   return (
     <div className="dental-page">
       <header className="header">
-        <Link to="/home" className="logo-text">PROTHEA</Link>
+        <Link to="/home" className="logo-text">PROTEQ</Link>
         <nav className="nav">
           <Link to="/home">Accueil</Link>
           <Link to="/about">À propos</Link>
@@ -189,7 +189,7 @@ export default function PredictionFormPage() {
               {/* Display modifications if prediction is non favorable */}
               {prediction === 'non favorable' && modifications.length > 0 && (
                 <div className="modifications-section">
-                  <h4>Modifications recommandées:</h4>
+                  <h4>Propositions thérapeutiques pour optimiser l'équilibre:</h4>
                   <ul className="modifications-list">
                     {modifications.map((mod, index) => (
                       <li key={index}>{mod}</li>

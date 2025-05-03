@@ -83,7 +83,7 @@ const SignIn = () => {
       <div className="signin-container">
         <div className="signin-card">
           <div className="welcome-section">
-            <h1>Bienvenue dans Prothea</h1>
+            <h1>Bienvenue dans PROTEQ</h1>
           </div>
   
           <form className="signin-form" onSubmit={handleSubmit}>
