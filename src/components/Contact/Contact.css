@@ -134,24 +134,24 @@
   border-radius: 3px;
 }
 
-.form-group {
+.form-group-contact {
   margin-bottom: 1.5rem;
   animation: fadeIn 0.6s ease-out var(--delay) both;
 }
 
-.form-group:nth-child(1) { --delay: 0.8s; }
-.form-group:nth-child(2) { --delay: 0.9s; }
-.form-group:nth-child(3) { --delay: 1.0s; }
+.form-group-contact:nth-child(1) { --delay: 0.8s; }
+.form-group-contact:nth-child(2) { --delay: 0.9s; }
+.form-group-contact:nth-child(3) { --delay: 1.0s; }
 
-.form-group label {
+.form-group-contact label {
   display: block;
   margin-bottom: 0.5rem;
   color: #1E3A8A;
   font-weight: 500;
 }
 
-.form-group input,
-.form-group textarea {
+.form-group-contact input,
+.form-group-contact textarea {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #CBD5E0;
@@ -161,19 +161,19 @@
   background-color: rgba(255, 255, 255, 0.9);
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.form-group-contact input:focus,
+.form-group-contact textarea:focus {
   outline: none;
   border-color: #3B82F6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
-.form-group textarea {
+.form-group-contact textarea {
   resize: vertical;
   min-height: 120px;
 }
 
-.submit-btn {
+.submit-btn-contact {
   padding: 0.75rem 2rem;
   background-color: #3B82F6;
   color: white;
@@ -188,17 +188,17 @@
   overflow: hidden;
 }
 
-.submit-btn:hover {
+.submit-btn-contact:hover {
   background-color: #2563EB;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
 }
 
-.submit-btn:active {
+.submit-btn-contact:active {
   transform: translateY(0);
 }
 
-.submit-btn::after {
+.submit-btn-contact::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -212,7 +212,7 @@
   transform-origin: 50% 50%;
 }
 
-.submit-btn:focus:not(:active)::after {
+.submit-btn-contact:focus:not(:active)::after {
   animation: ripple 1s ease-out;
 }
 
@@ -227,38 +227,7 @@
   }
 }
 
-/* Floating decorative elements */
-.floating-element {
-  position: absolute;
-  background: rgba(59, 130, 246, 0.1);
-  border-radius: 50%;
-  filter: blur(1px);
-  opacity: 0.6;
-  animation: floatElement 15s infinite ease-in-out;
-}
 
-.floating-element:nth-child(1) {
-  width: 40px;
-  height: 40px;
-  top: 10%;
-  left: 5%;
-  animation-delay: 0s;
-}
-
-.floating-element:nth-child(2) {
-  width: 20px;
-  height: 20px;
-  bottom: 10%;
-  right: 5%;
-  animation-delay: 2s;
-}
-
-@keyframes floatElement {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(20px, -25px); }
-  50% { transform: translate(-10px, 20px); }
-  75% { transform: translate(25px, 10px); }
-}
 
 @media (min-width: 768px) {
   .contact-container h1 {

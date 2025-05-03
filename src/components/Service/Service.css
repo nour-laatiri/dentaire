@@ -70,28 +70,8 @@
   color: #3B82F6;
 }
 
-.service-content {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  background-color: rgba(239, 246, 255, 0.85);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  animation: fadeInUp 0.6s ease-out 0.4s both;
-}
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
 
-@media (min-width: 1024px) {
-  .service-content {
-    flex-direction: row;
-    padding: 4rem;
-  }
-}
 
 .services-grid {
   display: grid;
@@ -200,16 +180,11 @@
   margin-bottom: 1rem;
 }
 
-.prediction-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 1.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
 
-.prediction-btn {
+.ml-btn {
   padding: 10px 20px;
+  background-color: #3B82F6;
+  color: white;
   border: none;
   border-radius: 30px;
   font-weight: 500;
@@ -217,13 +192,6 @@
   transition: all 0.3s ease;
   font-size: 1rem;
   white-space: nowrap;
-  position: relative;
-  overflow: hidden;
-}
-
-.ml-btn {
-  background-color: #3B82F6;
-  color: white;
 }
 
 .ml-btn:hover {
@@ -232,23 +200,7 @@
   box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
 }
 
-.ml-btn::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 5px;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.5);
-  opacity: 0;
-  border-radius: 100%;
-  transform: scale(1, 1) translate(-50%);
-  transform-origin: 50% 50%;
-}
 
-.ml-btn:focus:not(:active)::after {
-  animation: ripple 1s ease-out;
-}
 
 @keyframes ripple {
   0% {
@@ -261,51 +213,7 @@
   }
 }
 
-.service-image {
-  display: none;
-}
 
-@media (min-width: 1024px) {
-  .service-image {
-    display: block;
-    flex: 1;
-    min-height: 500px;
-    background-image: url('../../../public/denture2.jpeg');
-    background-size: cover;
-    background-position: center;
-    border-radius: 8px;
-    border: 2px solid #7db3f1;
-    box-shadow: 
-      0 25px 50px -12px rgba(59, 130, 246, 0.25),
-      0 0 0 1px rgba(255, 255, 255, 0.1);
-    animation: float 6s ease-in-out infinite, fadeInRight 0.8s ease-out 0.6s both;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    overflow: hidden;
-    margin-left: 2rem;
-  }
-
-  @keyframes fadeInRight {
-    from { opacity: 0; transform: translateX(30px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  .service-image::after {
-    content: '';
-    position: absolute;
-    bottom: -50px;
-    left: 10%;
-    width: 80%;
-    height: 20px;
-    background: radial-gradient(ellipse at center, 
-      rgba(59,130,246,0.4) 0%, 
-      rgba(255,255,255,0) 80%);
-    filter: blur(10px);
-    opacity: 0.7;
-    animation: reflect 6s ease-in-out infinite;
-  }
-}
 
 .wave-decoration {
   position: absolute;

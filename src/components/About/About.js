@@ -21,6 +21,7 @@ export default function About() {
           </p>
         </div>
         <div className="about-image"></div>
+        
       </div>
     </div>
   );
