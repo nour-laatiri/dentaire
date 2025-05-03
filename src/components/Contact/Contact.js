@@ -15,11 +15,11 @@ export default function Contact() {
         </div>
         <form className="contact-form">
           <h2>Envoyez-nous un message</h2>
-          <div className="form-group">
+          <div className="form-group-contact">
             <label htmlFor="name">Nom</label>
             <input type="text" id="name" required />
           </div>
-          <div className="form-group">
+          <div className="form-group-contact">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" required />
           </div>
@@ -27,7 +27,7 @@ export default function Contact() {
             <label htmlFor="message">Message</label>
             <textarea id="message" rows="5" required></textarea>
           </div>
-          <button type="submit" className="submit-btn">Envoyer</button>
+          <button type="submit" className="submit-btn-contact">Envoyer</button>
         </form>
       </div>
     </div>

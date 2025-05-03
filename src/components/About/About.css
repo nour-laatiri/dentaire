@@ -110,7 +110,7 @@
 .about-image {
   flex: 1;
   min-height: 400px;
-  background-image: url('../../../public/OIP.jpg');
+  background-image: url('../../../public/prothese-dentaire.jpeg');
   background-size: cover;
   background-position: center;
   border-radius: 8px;
@@ -119,27 +119,13 @@
   box-shadow: 
     0 25px 50px -12px rgba(59, 130, 246, 0.25),
     0 0 0 1px rgba(255, 255, 255, 0.1);
-  animation: float 6s ease-in-out infinite, fadeInRight 0.8s ease-out 0.6s both;
+  animation:fadeInRight 0.8s ease-out 0.6s;
   transform-style: preserve-3d;
   perspective: 1000px;
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   overflow: hidden;
 }
 
-@keyframes float {
-  0% { 
-    transform: translateY(0px) rotateY(0deg) rotateX(0deg); 
-    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
-  }
-  50% { 
-    transform: translateY(-20px) rotateY(5deg) rotateX(5deg);
-    box-shadow: 0 40px 60px rgba(59, 130, 246, 0.3);
-  }
-  100% { 
-    transform: translateY(0px) rotateY(0deg) rotateX(0deg); 
-    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
-  }
-}
 
 @keyframes fadeInRight {
   from { opacity: 0; transform: translateX(30px); }
@@ -167,35 +153,3 @@
   50% { transform: scale(1.05); opacity: 0.9; }
 }
 
-/* Floating decorative elements */
-.floating-element {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  filter: blur(1px);
-  opacity: 0.6;
-  animation: floatElement 15s infinite ease-in-out;
-}
-
-.floating-element:nth-child(1) {
-  width: 40px;
-  height: 40px;
-  top: 5%;
-  left: 5%;
-  animation-delay: 0s;
-}
-
-.floating-element:nth-child(2) {
-  width: 20px;
-  height: 20px;
-  bottom: 10%;
-  right: 5%;
-  animation-delay: 2s;
-}
-
-@keyframes floatElement {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(20px, -25px); }
-  50% { transform: translate(-10px, 20px); }
-  75% { transform: translate(25px, 10px); }
-}
