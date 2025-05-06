@@ -13,7 +13,7 @@ export default function PredictionFormPage() {
     crête: "",
     "forme de l'arcade": "",
     "fibro-muqueuse": "",
-    "Frein labial": "",
+    "Frien Lingual": "",
     eminences:"",
     "Classe d'édentement": "",
     "type de prothèse à envisager": "",

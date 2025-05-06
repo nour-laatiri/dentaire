@@ -232,7 +232,7 @@
   100% { background-position-x: 1200px; }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 400px) {
   .service-container h1 {
     font-size: 3rem;
   }

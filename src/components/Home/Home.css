@@ -10,6 +10,7 @@
   border-radius: 12px;
   gap: 2rem;
   animation: fadeIn 0.8s ease-out;
+  box-sizing: border-box;
 }
 
 @keyframes fadeIn {
@@ -17,23 +18,87 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Extra small devices (phones, 400px and below) */
+@media (max-width: 400px) {
+  .home-container {
+    padding: 100px 1.5rem 1.5rem;
+    gap: 1.5rem;
+  }
+  
+  .text-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .illustration {
+    height: 300px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  
+  .illustration::after {
+    bottom: -30px;
+    height: 15px;
+  }
+}
+
+/* Small devices (phones, 600px and below) */
+@media (max-width: 600px) {
+  .text-content {
+    max-width: 100%;
+  }
+  
+  .floating-dot:nth-child(1) {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .floating-dot:nth-child(2) {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* Medium devices (tablets, 768px and below) */
+@media (max-width: 768px) {
+  .illustration {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+/* Large devices (desktops, 1024px and up) */
 @media (min-width: 1024px) {
   .home-container {
     flex-direction: row;
     padding: 4rem;
   }
+  
+  .text-content {
+    text-align: left;
+  }
+  
+  .text-content p {
+    text-align: left;
+    font-size: 1.2rem;
+  }
 }
 
+/* Extra adjustments for very large screens */
+@media (min-width: 1600px) {
+  .home-container {
+    padding: 4rem 6rem;
+  }
+  
+  .illustration {
+    height: 550px;
+  }
+}
+
+/* Original styles below (unchanged) */
 .text-content {
   flex: 1;
   max-width: 600px;
   text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .text-content {
-    text-align: left;
-  }
 }
 
 .text-content h1 {
@@ -47,7 +112,7 @@
   to { opacity: 1; transform: translateX(0); }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 400px) {
   .text-content h1 {
     font-size: 3rem;
   }
@@ -88,14 +153,6 @@
   animation: fadeIn 0.6s ease-out 0.4s both;
 }
 
-@media (min-width: 1024px) {
-  .text-content p {
-    text-align: left;
-    font-size: 1.2rem;
-  }
-}
-
-/* Enhanced Floating Illustration */
 .illustration {
   margin-top: 60px;
   margin-bottom: 20px;
@@ -108,8 +165,6 @@
   aspect-ratio: 1 / 1;
   border-radius: 16px;
   animation: float 6s ease-in-out infinite, fadeInRight 0.8s ease-out 0.3s both;
-  
-  /* New floating 3D effect */
   transform-style: preserve-3d;
   perspective: 1000px;
   box-shadow: 
@@ -140,7 +195,6 @@
   to { opacity: 1; transform: translateX(0); }
 }
 
-/* Reflection effect */
 .illustration::after {
   content: '';
   position: absolute;
@@ -161,7 +215,6 @@
   50% { transform: scale(1.05); opacity: 0.9; }
 }
 
-/* Floating decorative dots */
 .floating-dot {
   position: absolute;
   background: white;
@@ -249,4 +302,3 @@
     opacity: 0;
   }
 }
-
