@@ -18,7 +18,7 @@ FEATURE_NAMES = [
     "crête",
     "forme de l'arcade",
     "fibro-muqueuse",
-    "Frein labial",
+    "Frien Lingual",
     "eminences",
     "Classe d'édentement",
     "type de prothèse à envisager",
@@ -35,7 +35,7 @@ def predict():
             'crête': data['crête'],
             "forme de l'arcade": data["forme de l'arcade"],
             'fibro-muqueuse': data['fibro-muqueuse'],
-            'Frein labial': data['Frein labial'],
+            'Frien Lingual': data['Frien Lingual'],
             'eminences': data['eminences'],
             "Classe d'édentement": data["Classe d'édentement"],
             "type de prothèse à envisager": data["type de prothèse à envisager"]

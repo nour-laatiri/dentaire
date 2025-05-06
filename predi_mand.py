@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-df=pd.read_csv(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\mandibule(ihope).csv")
+df=pd.read_csv(r"C:\Users\clien\Desktop\nour1.1\react-prediction-form\mandibule(ihope)(in) (4).csv")
 
 df.head()
 
@@ -51,7 +51,7 @@ for col in categorical_columns:
     X[col] = le.fit_transform(X[col])
     label_encoders[col] = le
 
-zero_not_accepted=["crête", "forme de l'arcade", "fibro-muqueuse", "Frein labial","eminences", "Classe d'édentement", "type de prothèse à envisager"]
+zero_not_accepted=["crête", "forme de l'arcade", "fibro-muqueuse", "Frien Lingual","eminences", "Classe d'édentement", "type de prothèse à envisager"]
 for column in zero_not_accepted:
     X[column] = X[column].replace(0, np.nan)
     mean= int(X[column].mean(skipna=True))
