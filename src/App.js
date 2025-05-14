@@ -12,6 +12,9 @@ import PatientInfoPage from "./Pages/PatientInfoPage/PatientInfoPage";
 import FormDePredictionMand from "./Pages/FormDePrediction/FormDePredictionMand/FormDePredictionMand";
 import FormDePredictionMax from "./Pages/FormDePrediction/FormDePredictionMax/FormDePredictionMax";
 import DeepLearning from "./Pages/DeepLearning/DeepLearning";
+import ProfilPage from "./Pages/ProfilPage/ProfilPage";
+
+
 import "./App.css";
 
 function App() {
@@ -36,6 +39,7 @@ function App() {
           <Route path="/FormDePredictionMax" element={<FormDePredictionMax />} />
           <Route path="/FormDePredictionMand" element={<FormDePredictionMand />} />
           <Route path="/DeepLearning" element={<DeepLearning />} />
+          <Route path="/ProfilPage" element={<ProfilPage />} />
         </Route>
       </Routes>
     </Router>

@@ -1,4 +1,4 @@
-/* src/Pages/FormDePrediction/FormDePrediction.css */
+
 .signout {
   padding: 0.75rem 1.5rem;
   background-color: #3B82F6;
@@ -274,6 +274,22 @@
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
+}
+.save-btn1 {
+  background-color: #0d2545;
+  color: white;
+  border: none;
+  margin-left: 1rem;
+  padding: 10px 20px;
+  margin-top: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.save-btn1:hover {
+  background-color: #3a5a80;
 }
 @media print {
   .print-content, .print-content * {

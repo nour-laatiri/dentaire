@@ -4,6 +4,8 @@ import "../FormPatient/FormPatient.css";
 
 export default function PatientFormPage() {
   const navigate = useNavigate();
+  
+
    
   const handleSignOut = () => {
     // Clear the authentication flag
@@ -48,6 +50,7 @@ export default function PatientFormPage() {
           <Link to="/about">À propos</Link>
           <Link to="/service">Services</Link>
           <Link to="/contact">Contact</Link>
+          <Link to="/ProfilPage">Mes patients</Link> 
         </nav>
         <button className="signout"onClick={handleSignOut}>
         Deconnexion

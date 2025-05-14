@@ -55,10 +55,10 @@ model = keras.Sequential([
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 # Train model
-model.fit(X_train, y_train, epochs=12, validation_data=(X_test, y_test))
+model.fit(X_train, y_train, epochs=10, validation_data=(X_test, y_test))
 
 # Save model
-model.save("dental_prosthesis_model_vgg16.h5")
+model.save("dental_prosthesis_model_vgg16.keras")
 
 # Prediction function
 def predict_prosthesis(image_path, model_path="dental_prosthesis_model_vgg16.h5"):
@@ -80,23 +80,8 @@ def predict_prosthesis(image_path, model_path="dental_prosthesis_model_vgg16.h5"
     }
     return f"Prediction: {class_text} ({confidence:.2f}% confidence)\nDescription: {descriptions[class_text]}"
 
-# Function to manually test an image
-def test_image_manually():
-    image_path = r"C:\Users\clien\Desktop\nour1.1\dl\img14.png"
-    if not os.path.exists(image_path):
-        print(f"Error: File not found at '{image_path}'")
-        return
-        
-    try:
-        result = predict_prosthesis(image_path)
-        print("\n" + "="*50)
-        print(result)
-        print("="*50 + "\n")
-    except Exception as e:
-        print(f"Error processing image: {e}")
+
 
 # Example usage
 if __name__ == "__main__":
     print("Dental Prosthesis Classification Model")
-    print("You can now test images manually.")
-    test_image_manually()

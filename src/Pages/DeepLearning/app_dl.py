@@ -11,7 +11,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Load your model (do this once when the server starts)
-model = load_model("dental_prosthesis_model_vgg16.h5")
+model = load_model("dental_prosthesis_model_vgg16.keras")
 
 # Configuration
 UPLOAD_FOLDER = 'uploads'
