@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useLocation, Link , useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../FormDePredictionMand/FormDePredictionMand.css";
+import { auth } from "../../../components/firebase/firebase";
+import { PatientService } from "../../../components/firebase/firestore";
 
 export default function PredictionFormPage() {
   const navigate = useNavigate();
@@ -9,6 +11,7 @@ export default function PredictionFormPage() {
   const location = useLocation();
   const [patientData, setPatientData] = useState(null);
   const [predictionType, setPredictionType] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
   const [formData, setFormData] = useState({
     crête: "",
     "forme de l'arcade": "",
@@ -20,6 +23,8 @@ export default function PredictionFormPage() {
   });
   const [prediction, setPrediction] = useState(null);
   const [modifications, setModifications] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const handleSignOut = () => {
     // Clear the authentication flag
     localStorage.removeItem('isAuthenticated');  // <-- THIS IS THE CRUCIAL ADDITION
@@ -31,6 +36,7 @@ export default function PredictionFormPage() {
   };
 
   useEffect(() => {
+    console.log("Location state:", location.state);
     if (location.state) {
       setPatientData(location.state.patientData);
       setPredictionType(location.state.predictionType);
@@ -41,7 +47,7 @@ export default function PredictionFormPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:5003/predict", {
@@ -58,6 +64,47 @@ export default function PredictionFormPage() {
       }
     } catch (error) {
       console.error("Prediction error:", error);
+    }
+  };
+  const savePrediction = async () => {
+    if (!patientData?.id || !prediction) {
+      alert("Patient data or prediction missing");
+      return;
+    }
+    
+    if (!auth.currentUser) {
+      alert("User not authenticated");
+      return;
+    }
+  
+    setIsSaving(true);
+    try {
+      const predictionData = {
+        type: predictionType,
+        result: prediction,
+        formData: formData, // This contains all the input values
+        modifications: modifications,
+        patientInfo: { // Store basic patient info for reference
+          id: patientData.id,
+          name: `${patientData.prenom} ${patientData.nom}`,
+          age: patientData.age
+        }
+      };
+      
+      await PatientService.savePrediction(
+        auth.currentUser.uid,
+        patientData.id,
+        predictionData
+      );
+      
+      alert("Prédiction enregistrée avec succès!");
+      // Optionally navigate back or refresh predictions
+      // navigate(`/patients/${patientData.id}`);
+    } catch (error) {
+      console.error("Erreur lors de l'enregistrement:", error);
+      alert(`Erreur lors de l'enregistrement: ${error.message}`);
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -136,6 +183,8 @@ export default function PredictionFormPage() {
           <Link to="/about">À propos</Link>
           <Link to="/service">Services</Link>
           <Link to="/contact">Contact</Link>
+          <Link to="/ProfilPage">Mes patients</Link> 
+          
         </nav>
         <button className="signout"onClick={handleSignOut}>
         Deconnexion
@@ -203,6 +252,13 @@ export default function PredictionFormPage() {
     >
       Imprimer cette Prédiction
           </button>
+          <button 
+                  className="save-btn1"
+                  onClick={savePrediction}
+                  disabled={!prediction || isSaving}
+                >
+                  {isSaving ? "Enregistrement..." : "Enregistrer cette Prédiction"}
+                </button>
             </div>
             
           )}

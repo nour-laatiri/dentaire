@@ -27,6 +27,7 @@ export default function Navbar() {
           <Link to="/about">À propos</Link> {/* Moved inside nav-center */}
           <Link to="/service">Services</Link>
           <Link to="/contact">Contact</Link>
+          <Link to="/ProfilPage">Mes patients</Link> 
         </div>
         
       </nav>

@@ -10,7 +10,7 @@ export default function Contact() {
           <h2>Informations de contact</h2>
           <p><strong>Adresse:</strong> 123 Rue de borghiba, Tunisie, Monastir</p>
           <p><strong>Téléphone:</strong> +216 54 395 278</p>
-          <p><strong>Email:</strong> contact@prothea.com</p>
+          <p><strong>Email:</strong> contact@proteq.com</p>
           <p><strong>Heures d'ouverture:</strong> Lun-Ven: 9h-17h</p>
         </div>
         <form className="contact-form">

@@ -1,37 +1,112 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
+import { PatientService } from "../../components/firebase/firestore";
+import { auth } from "../../components/firebase/firebase";
 import "../PatientInfoPage/PatientInfoPage.css";
 
 export default function PatientInfoPage() {
-
   const location = useLocation();
   const navigate = useNavigate();
   const [patientData, setPatientData] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageFile, setImageFile] = useState(null);
-         const handleSignOut = () => {
-           // Clear the authentication flag
-           localStorage.removeItem('isAuthenticated');  // <-- THIS IS THE CRUCIAL ADDITION
-           
-           // Replace the current entry in history stack with signin page
-           navigate('/Signin', { replace: true });  // Changed from '/' to '/Signin' to match your routes
-           
-           // Optional: Clear any user data from state/context here
-         };
+  const [isSaving, setIsSaving] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
+  // Initialize auth state
   useEffect(() => {
-    if (location.state?.patientInfo) {
-      setPatientData(location.state.patientInfo);
-    }
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      setCurrentUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Load patient data
+  useEffect(() => {
+    const loadPatientData = async () => {
+      try {
+        // Check for patient ID in URL
+        const params = new URLSearchParams(window.location.search);
+        const patientId = params.get('id');
+        
+        if (patientId) {
+          const data = await PatientService.getPatient(patientId);
+          if (data) {
+            setPatientData(data);
+            if (data.imageUrl) setSelectedImage(data.imageUrl);
+          }
+        } else if (location.state?.patientInfo) {
+          setPatientData(location.state.patientInfo);
+        }
+      } catch (error) {
+        console.error("Error loading patient:", error);
+        alert("Failed to load patient data");
+      }
+    };
+
+    loadPatientData();
   }, [location]);
+
+  const handleSignOut = () => {
+    auth.signOut()
+      .then(() => navigate('/Signin', { replace: true }))
+      .catch(error => console.error("Sign out error:", error));
+  };
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
       setSelectedImage(URL.createObjectURL(file));
-      setImageFile(file); // Store the file object for later use
+      setImageFile(file);
     }
   };
+  
+    const handleSavePatient = async () => {
+  if (!currentUser) {
+    alert("Vous devez être connecté pour sauvegarder");
+    return;
+  }
+
+  setIsSaving(true);
+  try {
+    // Upload image if new one was selected
+    let imageUrl = patientData.imageUrl;
+    if (imageFile) {
+      imageUrl = await PatientService.uploadPatientImage(
+        patientData.id || "temp_" + Date.now(),
+        imageFile
+      );
+    }
+
+    // Prepare complete patient data
+    const fullPatientData = {
+      prenom: patientData.prenom || "",
+      nom: patientData.nom || "",
+      age: patientData.age || 0,
+      sexe: patientData.sexe || "",
+      etat_general: patientData.etat_general || "",
+      medication: patientData.medication || "",
+      classe_edentement: patientData.classe_edentement || "",
+      etendue_edentement: patientData.etendue_edentement || "",
+      teethPresent: patientData.teethPresent || [],
+      imageUrl: imageUrl || null
+    };
+
+    if (patientData.id) {
+      await PatientService.updatePatient(currentUser.uid, patientData.id, fullPatientData);
+      alert("Dossier patient mis à jour avec succès!");
+    } else {
+      const docId = await PatientService.createPatient(fullPatientData, currentUser.uid);
+      setPatientData(prev => ({ ...prev, id: docId }));
+      alert("Nouveau patient enregistré avec succès!");
+    }
+  } catch (error) {
+    console.error("Save error:", error);
+    alert("Erreur lors de la sauvegarde: " + error.message);
+  } finally {
+    setIsSaving(false);
+  }
+};
 
   const navigateToPrediction = (type) => {
     const route = type === 'maxillaire' 
@@ -40,7 +115,10 @@ export default function PatientInfoPage() {
     
     navigate(route, { 
       state: { 
-        patientData,
+        patientData: {
+          ...patientData,
+          imageUrl: selectedImage
+        },
         image: selectedImage,
         predictionType: type 
       } 
@@ -49,26 +127,26 @@ export default function PatientInfoPage() {
 
   const navigateToDeepLearning = () => {
     if (!selectedImage) {
-      alert("Please upload an image first");
+      alert("Veuillez téléverser une image d'abord");
       return;
     }
     
     navigate('/DeepLearning', { 
       state: { 
-        patientData,
+        patientData: {
+          ...patientData,
+          imageUrl: selectedImage
+        },
         image: selectedImage,
-        imageFile: imageFile // Pass the actual file object
+        imageFile: imageFile
       } 
     });
   };
+
   const handlePrintPatientInfo = () => {
-    // Create a new window for printing
     const printWindow = window.open('', '_blank');
-    
-    // Get the patient info card content
     const cardClone = document.querySelector('.patient-info-card').cloneNode(true);
     
-    // Remove elements we don't want to print
     const elementsToRemove = [
       '.action-buttons',
       '.image-preview',
@@ -80,7 +158,6 @@ export default function PatientInfoPage() {
       if (element) element.remove();
     });
   
-    // Write the print content to the new window
     printWindow.document.write(`
       <!DOCTYPE html>
       <html>
@@ -106,7 +183,6 @@ export default function PatientInfoPage() {
             Impression générée le ${new Date().toLocaleDateString()}
           </div>
           <script>
-            // Automatically trigger print and close when done
             window.onload = function() {
               setTimeout(function() {
                 window.print();
@@ -117,9 +193,9 @@ export default function PatientInfoPage() {
         </body>
       </html>
     `);
-    
     printWindow.document.close();
   };
+
   return (
     <div className="dental-page">
       <header className="header">
@@ -129,11 +205,11 @@ export default function PatientInfoPage() {
           <Link to="/about">À propos</Link>
           <Link to="/service">Services</Link>
           <Link to="/contact">Contact</Link>
+          <Link to="/ProfilPage">Mes patients</Link> 
         </nav>
-        <button className="signout"onClick={handleSignOut}>
-          Deconnexion
-
-          </button>
+        <button className="signout" onClick={handleSignOut}>
+          Déconnexion
+        </button>
       </header>
 
       <main className="info-page-container">
@@ -144,8 +220,6 @@ export default function PatientInfoPage() {
             <div className="patient-info-card">
               <div className="patient-details">
                 <h2>{patientData.prenom} {patientData.nom}</h2>
-                
-           
                 
                 <div className="detail-section">
                   <h3>Informations Personnelles</h3>
@@ -175,33 +249,45 @@ export default function PatientInfoPage() {
                   )}
                 </div>
               </div>
+              
               <div className="action-buttons">
+                <button 
+                  className="action-btn save-btn"
+                  onClick={handleSavePatient}
+                  disabled={isSaving}
+                >
+                  {isSaving ? "Sauvegarde..." : (patientData.id ? "Mettre à jour" : "Enregistrer")}
+                </button>
+                
                 <button 
                   className="action-btn maxillaire"
                   onClick={() => navigateToPrediction('maxillaire')}
                 >
                   Prédiction Maxillaire
                 </button>
+                
                 <button 
                   className="action-btn mandibulaire"
                   onClick={() => navigateToPrediction('mandibulaire')}
                 >
                   Prédiction Mandibulaire
                 </button>
+                
                 <button
                   className="action-btn deep-learning"
                   onClick={navigateToDeepLearning}
                   disabled={!selectedImage}
                 >
-                  analyse d'equilibre de prothése
+                  Analyse d'équilibre de prothèse
                 </button>
+                
                 <button 
-                className="action-btn print-btn"
-                onClick={handlePrintPatientInfo}
->
-              Imprimer les Informations du Patient
-              </button>
-               
+                  className="action-btn print-btn"
+                  onClick={handlePrintPatientInfo}
+                >
+                  Imprimer les Informations
+                </button>
+                
                 <label className="upload-btn">
                   Téléverser une Image
                   <input 
@@ -211,12 +297,11 @@ export default function PatientInfoPage() {
                     style={{ display: 'none' }} 
                   />
                 </label>
-               
               </div>
 
               {selectedImage && (
                 <div className="image-preview">
-                  <img src={selectedImage} alt="Uploaded preview" />
+                  <img src={selectedImage} alt="Aperçu de l'image" />
                   <p>Image prête pour analyse</p>
                 </div>
               )}
@@ -227,6 +312,3 @@ export default function PatientInfoPage() {
     </div>
   );
 }
-              
-
-            
