@@ -3,6 +3,7 @@ import { useLocation, Link , useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../FormDePredictionMand/FormDePredictionMand.css";
 import { auth } from "../../../components/firebase/firebase";
+import { serverTimestamp } from "firebase/firestore";
 import { PatientService } from "../../../components/firebase/firestore";
 
 export default function PredictionFormPage() {
@@ -44,6 +45,26 @@ export default function PredictionFormPage() {
       setPredictionType(location.state.predictionType);
     }
   }, [location]);
+useEffect(() => {
+  if (location.state?.predictionId && patientData?.id && auth.currentUser) {
+    const loadExistingPrediction = async () => {
+      try {
+        const existingPrediction = await PatientService.getPrediction(
+          auth.currentUser.uid,
+          patientData.id,
+          location.state.predictionId
+        );
+        // Set your form state with the existing prediction data
+        setFormData(existingPrediction.formData || {});
+        setModifications(existingPrediction.modifications || []);
+        setPrediction(existingPrediction.result || null);
+      } catch (error) {
+        console.error("Error loading existing prediction:", error);
+      }
+    };
+    loadExistingPrediction();
+  }
+}, [location.state, patientData, auth.currentUser]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -69,67 +90,62 @@ export default function PredictionFormPage() {
     }
   };
   
-  const savePrediction = async () => {
-    if (isSaving) return;
-    
-    if (!patientData?.id || !prediction) {
-      alert("Patient data or prediction missing");
-      return;
-    }
-    
-    if (!auth.currentUser) {
-      alert("User not authenticated");
-      return;
-    }
+const savePrediction = async () => {
+  if (!patientData?.id || !prediction) {
+    alert("Patient data or prediction missing");
+    return;
+  }
   
-    setIsSaving(true);
-    const predictionType = 'mandibulaire';
-    try {
-      const predictionData = {
-        type: predictionType,
-        result: prediction,
-        formData: formData,
-        modifications: modifications,
-        patientInfo: {
-          id: patientData.id,
-          name: `${patientData.prenom} ${patientData.nom}`,
-          age: patientData.age
-        },
-        updatedAt: new Date().toISOString() // Add update timestamp
-      };
-      
-      console.log("Saving prediction data:", predictionData);
-      console.log("Is update operation:", isUpdate);
-      
-      if (isUpdate) {
-        if (!state?.predictionId) {
-          throw new Error("Missing prediction ID for update");
-        }
-        await PatientService.updatePrediction(
-          auth.currentUser.uid,
-          patientData.id,
-          state.predictionId,
-          predictionData
-        );
-        alert("Prédiction maxillaire mise à jour avec succès!");
-      } else {
-        await PatientService.savePrediction(
-          auth.currentUser.uid,
-          patientData.id,
-          predictionData
-        );
-        alert("Nouvelle prédiction mandibulaire enregistrée avec succès!");
-      }
-      
-      // Optionally navigate back after saving
-      navigate(-1);
-    } catch (error) {
-      console.error("Erreur lors de l'enregistrement:", error);
-      alert(`Erreur lors de l'enregistrement: ${error.message}`);
-    } finally {
-      setIsSaving(false);
+  if (!auth.currentUser) {
+    alert("User not authenticated");
+    return;
+  }
+
+  setIsSaving(true);
+  const predictionType = 'Mandibulaire';
+  try {
+    const predictionData = {
+      type: predictionType,
+      result: prediction,
+      formData: formData,
+      modifications: modifications,
+      patientInfo: {
+        id: patientData.id,
+        name: `${patientData.prenom} ${patientData.nom}`,
+        age: patientData.age
+      },
+      lastUpdated: serverTimestamp()
+    };
+    
+    console.log("Saving prediction data:", predictionData);
+    
+    // Check if we're updating an existing prediction or creating a new one
+    if (location.state?.predictionId) {
+      // Update existing prediction
+      await PatientService.updatePrediction(
+        auth.currentUser.uid,
+        patientData.id,
+        location.state.predictionId,
+        predictionData
+      );
+      alert("Prédiction mise à jour avec succès!");
+    } else {
+      // Create new prediction
+      await PatientService.savePrediction(
+        auth.currentUser.uid,
+        patientData.id,
+        predictionData
+      );
+      alert("Prédiction enregistrée avec succès!");
     }
-  };
+    navigate('/ProfilPage');
+  } catch (error) {
+    console.error("Erreur lors de l'enregistrement:", error);
+    alert(`Erreur lors de l'enregistrement: ${error.message}`);
+  } finally {
+    setIsSaving(false);
+  }
+};
 
   // Function to group form fields into pairs
   const groupFieldsIntoPairs = () => {

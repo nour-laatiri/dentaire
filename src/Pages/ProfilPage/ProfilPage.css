@@ -318,6 +318,42 @@
 .create-btn:hover {
   opacity: 0.9;
 }
+.update-status {
+  padding: 5px;
+  margin-top: 5px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.update-status.loading {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.update-status.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.update-status.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.param-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3px;
+  font-size: 0.9rem;
+}
+
+.param-key {
+  font-weight: 500;
+}
+
+.param-value {
+  color: #666;
+}
 
 /* ====================== */
 /* RESPONSIVE DESIGN      */
