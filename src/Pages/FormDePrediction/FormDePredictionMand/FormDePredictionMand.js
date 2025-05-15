@@ -25,6 +25,8 @@ export default function PredictionFormPage() {
   const [modifications, setModifications] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { state } = useLocation();
+  const isUpdate = !!state?.predictionId;
   const handleSignOut = () => {
     // Clear the authentication flag
     localStorage.removeItem('isAuthenticated');  // <-- THIS IS THE CRUCIAL ADDITION
@@ -66,7 +68,10 @@ export default function PredictionFormPage() {
       console.error("Prediction error:", error);
     }
   };
+  
   const savePrediction = async () => {
+    if (isSaving) return;
+    
     if (!patientData?.id || !prediction) {
       alert("Patient data or prediction missing");
       return;
@@ -78,28 +83,46 @@ export default function PredictionFormPage() {
     }
   
     setIsSaving(true);
+    const predictionType = 'mandibulaire';
     try {
       const predictionData = {
         type: predictionType,
         result: prediction,
-        formData: formData, // This contains all the input values
+        formData: formData,
         modifications: modifications,
-        patientInfo: { // Store basic patient info for reference
+        patientInfo: {
           id: patientData.id,
           name: `${patientData.prenom} ${patientData.nom}`,
           age: patientData.age
-        }
+        },
+        updatedAt: new Date().toISOString() // Add update timestamp
       };
       
-      await PatientService.savePrediction(
-        auth.currentUser.uid,
-        patientData.id,
-        predictionData
-      );
+      console.log("Saving prediction data:", predictionData);
+      console.log("Is update operation:", isUpdate);
       
-      alert("Prédiction enregistrée avec succès!");
-      // Optionally navigate back or refresh predictions
-      // navigate(`/patients/${patientData.id}`);
+      if (isUpdate) {
+        if (!state?.predictionId) {
+          throw new Error("Missing prediction ID for update");
+        }
+        await PatientService.updatePrediction(
+          auth.currentUser.uid,
+          patientData.id,
+          state.predictionId,
+          predictionData
+        );
+        alert("Prédiction maxillaire mise à jour avec succès!");
+      } else {
+        await PatientService.savePrediction(
+          auth.currentUser.uid,
+          patientData.id,
+          predictionData
+        );
+        alert("Nouvelle prédiction mandibulaire enregistrée avec succès!");
+      }
+      
+      // Optionally navigate back after saving
+      navigate(-1);
     } catch (error) {
       console.error("Erreur lors de l'enregistrement:", error);
       alert(`Erreur lors de l'enregistrement: ${error.message}`);

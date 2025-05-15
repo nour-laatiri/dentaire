@@ -27,6 +27,7 @@ export default function PredictionFormPage() {
   const [modifications, setModifications] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  
 
   const handleSignOut = () => {
     localStorage.removeItem('isAuthenticated');
@@ -77,6 +78,7 @@ const savePrediction = async () => {
   }
 
   setIsSaving(true);
+  const predictionType = 'maxillaire';
   try {
     const predictionData = {
       type: predictionType,

@@ -75,7 +75,7 @@ export default function PatientFormPage() {
               </div>
               <div className="form-row">
                 <label>Âge:</label>
-                <input type="number" name="age" min="1" max="120" required />
+                <input type="number" name="age" required />
               </div>
               <div className="form-row">
                 <label>Sexe:</label>

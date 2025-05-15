@@ -10,7 +10,8 @@ import {
   where,
   getDocs,
   orderBy,
-  serverTimestamp
+  serverTimestamp,
+  addDoc // Add this import
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import { db, storage } from "./firebase";
@@ -69,11 +70,6 @@ export const PatientService = {
     }
   },
 
-  /**
-   * Deletes a patient document and all associated predictions
-   * @param {string} userId - The user ID (doctor ID)
-   * @param {string} patientId - The patient ID to delete
-   */
   deletePatient: async (userId, patientId) => {
     try {
       // First delete all predictions for this patient
@@ -99,7 +95,6 @@ export const PatientService = {
       await setDoc(predictionRef, {
         ...predictionData,
         timestamp: serverTimestamp(),
-        type: predictionData.type || 'maxillaire',
         parameters: predictionData.formData || {},
         result: predictionData.result,
         modifications: predictionData.modifications || []
@@ -125,12 +120,43 @@ export const PatientService = {
     }
   },
 
+  createPrediction: async (userId, patientId, predictionData) => {
+    try {
+      const predictionRef = await addDoc(
+        collection(db, "users", userId, "patients", patientId, "predictions"),
+        {
+          ...predictionData,
+          timestamp: serverTimestamp()
+        }
+      );
+      return predictionRef.id;
+    } catch (error) {
+      console.error("Error creating prediction:", error);
+      throw error;
+    }
+  },
+
   deletePrediction: async (userId, patientId, predictionId) => {
     try {
       await deleteDoc(doc(db, "users", userId, "patients", patientId, "predictions", predictionId));
     } catch (error) {
       console.error("Error deleting prediction:", error);
       throw new Error("Failed to delete prediction");
+    }
+  },
+
+  updatePrediction: async (userId, patientId, predictionId, updatedData) => {
+    try {
+      await updateDoc(
+        doc(db, "users", userId, "patients", patientId, "predictions", predictionId),
+        {
+          ...updatedData,
+          lastUpdated: serverTimestamp()
+        }
+      );
+    } catch (error) {
+      console.error("Error updating prediction:", error);
+      throw error;
     }
   },
 
