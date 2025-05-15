@@ -40,28 +40,27 @@ export default function ProfilePage() {
     setLoadingPredictions(prev => ({ ...prev, [patientId]: true }));
     try {
       const preds = await PatientService.getPredictions(auth.currentUser.uid, patientId);
-  setPredictionsMap(prev => ({
-    ...prev,
-    [patientId]: preds.map(pred => {
-      // For image-based predictions, map the confidence and description to parameters
-      if (pred.type === 'analyse par image') {
-        return {
-          ...pred,
-          parameters: {
-            ...(pred.parameters || {}),
-            confidence: pred.confidence,
-            description: pred.description,
-            // Preserve any existing parameters
-          }
-        };
-      }
-      // For other predictions, just ensure parameters exists
+setPredictionsMap(prev => ({
+  ...prev,
+  [patientId]: preds.map(pred => {
+    // For image-based predictions
+    if (pred.type === 'analyse par image') {
       return {
         ...pred,
-        parameters: pred.parameters || {}
+        formData: {  // Changed from parameters to formData
+          ...(pred.formData || {}),
+          confidence: pred.confidence,
+          description: pred.description
+        }
       };
-    })
-  }));
+    }
+    // For other predictions
+    return {
+      ...pred,
+      formData: pred.formData || {}  // Ensure formData exists
+    };
+  })
+}));
           
           
         
@@ -83,27 +82,18 @@ const handleDeletePatient = async (patientId) => {
     }
   }
 };
-
-  const handleUpdatePrediction = (patientId, predictionId, predictionType) => {
-    const patient = patients.find(p => p.id === patientId);
-    
-    // Navigate to different forms based on prediction type
-    if (predictionType === 'maxillaire') {
-      navigate(`/FormDePredictionMax`, {
-        state: {
-          patientData: patient,
-          predictionId: predictionId
-        }
-      });
-    } else if (predictionType === 'mandibulaire') {
-      navigate(`/FormDePredictionMand`, {
-        state: {
-          patientData: patient,
-          predictionId: predictionId
-        }
-      });
+const handleUpdatePrediction = (patientId, predictionId, predictionType) => {
+  const patient = patients.find(p => p.id === patientId);
+  
+  navigate(`/FormDePrediction${predictionType === 'maxillaire' ? 'Max' : 'Mand'}`, {
+    state: {
+      patientData: patient,
+      predictionId: predictionId,
+      predictionType: predictionType,
     }
-  };
+  });
+};
+
 
 const handleDeletePrediction = async (patientId, predictionId) => {
   if (window.confirm("Êtes-vous sûr de vouloir supprimer cette prédiction?")) {
@@ -217,7 +207,7 @@ const PredictionHistory = ({ patientId }) => {
               <div className="prediction-parameters">
                 <h6>Paramètres utilisés:</h6>
                 <div className="parameters-grid">
-                  {Object.entries(pred.parameters).map(([key, value]) => (
+                   {Object.entries(pred.formData || {}).map(([key, value]) => (
                     <div key={key} className="parameter-item">
                       <span className="parameter-name">{key}:</span>
                       <span className="parameter-value">{value}</span>

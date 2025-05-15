@@ -7,7 +7,6 @@ import {
   deleteDoc,
   collection,
   query,
-  where,
   getDocs,
   orderBy,
   serverTimestamp,
@@ -145,21 +144,21 @@ export const PatientService = {
     }
   },
 
-  updatePrediction: async (userId, patientId, predictionId, updatedData) => {
-    try {
-      await updateDoc(
-        doc(db, "users", userId, "patients", patientId, "predictions", predictionId),
-        {
-          ...updatedData,
-          lastUpdated: serverTimestamp()
-        }
-      );
-    } catch (error) {
-      console.error("Error updating prediction:", error);
-      throw error;
-    }
-  },
-
+// In your PatientService
+updatePrediction: async (userId, patientId, predictionId, updatedData) => {
+  try {
+    await updateDoc(
+      doc(db, "users", userId, "patients", patientId, "predictions", predictionId),
+      {
+        ...updatedData,  // This spreads ALL fields including formData
+        lastUpdated: serverTimestamp()
+      }
+    );
+  } catch (error) {
+    console.error("Error updating prediction:", error);
+    throw error;
+  }
+},
   // ================== IMAGE OPERATIONS ==================
   uploadPatientImage: async (patientId, imageFile) => {
     try {

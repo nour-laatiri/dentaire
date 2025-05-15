@@ -3,6 +3,7 @@ import { useLocation, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../FormDePredictionMax/FormDePredictionMax.css";
 import { auth } from "../../../components/firebase/firebase";
+import { serverTimestamp } from "firebase/firestore";
 import { PatientService } from "../../../components/firebase/firestore";
 
 export default function PredictionFormPage() {
@@ -41,6 +42,27 @@ export default function PredictionFormPage() {
       setPredictionType(location.state.predictionType);
     }
   }, [location]);
+  // In your formmaxillaire component, add this useEffect:
+useEffect(() => {
+  if (location.state?.predictionId && patientData?.id && auth.currentUser) {
+    const loadExistingPrediction = async () => {
+      try {
+        const existingPrediction = await PatientService.getPrediction(
+          auth.currentUser.uid,
+          patientData.id,
+          location.state.predictionId
+        );
+        // Set your form state with the existing prediction data
+        setFormData(existingPrediction.formData || {});
+        setModifications(existingPrediction.modifications || []);
+        setPrediction(existingPrediction.result || null);
+      } catch (error) {
+        console.error("Error loading existing prediction:", error);
+      }
+    };
+    loadExistingPrediction();
+  }
+}, [location.state, patientData, auth.currentUser]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -85,22 +107,36 @@ const savePrediction = async () => {
       result: prediction,
       formData: formData,
       modifications: modifications,
-      patientInfo: { // Store basic patient info for reference
+      patientInfo: {
         id: patientData.id,
         name: `${patientData.prenom} ${patientData.nom}`,
         age: patientData.age
-      }
+      },
+      lastUpdated: serverTimestamp()
     };
     
     console.log("Saving prediction data:", predictionData);
     
-    await PatientService.savePrediction(
-      auth.currentUser.uid,
-      patientData.id,
-      predictionData
-    );
-    
-    alert("Prédiction enregistrée avec succès!");
+    // Check if we're updating an existing prediction or creating a new one
+    if (location.state?.predictionId) {
+      // Update existing prediction
+      await PatientService.updatePrediction(
+        auth.currentUser.uid,
+        patientData.id,
+        location.state.predictionId,
+        predictionData
+      );
+      alert("Prédiction mise à jour avec succès!");
+    } else {
+      // Create new prediction
+      await PatientService.savePrediction(
+        auth.currentUser.uid,
+        patientData.id,
+        predictionData
+      );
+      alert("Prédiction enregistrée avec succès!");
+    }
+  navigate('/ProfilPage'); // Navigate back to profile page
   } catch (error) {
     console.error("Erreur lors de l'enregistrement:", error);
     alert(`Erreur lors de l'enregistrement: ${error.message}`);
@@ -108,7 +144,6 @@ const savePrediction = async () => {
     setIsSaving(false);
   }
 };
-
   const groupFieldsIntoPairs = () => {
     const fields = Object.keys(formData);
     const pairs = [];
