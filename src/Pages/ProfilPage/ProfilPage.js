@@ -71,16 +71,7 @@ export default function ProfilePage() {
       setLoadingPredictions(prev => ({ ...prev, [patientId]: false }));
     }
   };
-  const handleUpdatePatient = (patientId) => {
-  const patient = patients.find(p => p.id === patientId);
   
-  navigate(`/FormPatient`, {
-    state: {
-      patientData: patient,
-      isUpdate: true  // Optional flag to indicate this is an update
-    }
-  });
-};
 
 const handleDeletePatient = async (patientId) => {
   if (window.confirm("Êtes-vous sûr de vouloir supprimer ce patient et toutes ses données?")) {
@@ -124,15 +115,60 @@ const handleDeletePrediction = async (patientId, predictionId) => {
     }
   }
 };
+const handleCreateNewPrediction = (patientId, predictionType) => {
+  const patient = patients.find(p => p.id === patientId);
+  
+  if (predictionType === 'maxillaire') {
+    navigate(`/FormDePredictionMax`, {
+      state: {
+        patientData: patient
+      }
+    });
+  } else if (predictionType === 'mandibulaire') {
+    navigate(`/FormDePredictionMand`, {
+      state: {
+        patientData: patient
+      }
+    });
+  }
+};
+
 
 const PredictionHistory = ({ patientId }) => {
   const predictions = predictionsMap[patientId] || [];
   const isLoading = loadingPredictions[patientId];
+  const hasMaxillaire = predictions.some(p => p.type === 'maxillaire');
+  const hasMandibulaire = predictions.some(p => p.type === 'mandibulaire');
   
   
   return (
     <div className="prediction-history">
       <h4>Historique des Prédictions</h4>
+       <div className="prediction-creation-buttons">
+        {!hasMaxillaire && (
+          <button 
+            className="create-btn maxillaire"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleCreateNewPrediction(patientId, 'maxillaire');
+            }}
+          >
+            + Ajouter Prédiction Maxillaire
+          </button>
+        )}
+        
+        {!hasMandibulaire && (
+          <button 
+            className="create-btn mandibulaire"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleCreateNewPrediction(patientId, 'mandibulaire');
+            }}
+          >
+            + Ajouter Prédiction Mandibulaire
+          </button>
+        )}
+      </div>
       
       {isLoading ? (
         <p>Chargement des prédictions...</p>
@@ -281,15 +317,7 @@ const PredictionHistory = ({ patientId }) => {
               {/* Prediction History Inside Patient Card */}
               <PredictionHistory patientId={patient.id} />
               <div className="patient-actions">
-  <button 
-    className="update-btn"
-    onClick={(e) => {
-      e.stopPropagation();
-      handleUpdatePatient(patient.id);
-    }}
-  >
-    Modifier Patient
-  </button>
+
   <button 
     className="delete-btn"
     onClick={(e) => {

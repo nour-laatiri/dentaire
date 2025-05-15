@@ -251,13 +251,13 @@ export default function PatientInfoPage() {
               </div>
               
               <div className="action-buttons">
-                <button 
-                  className="action-btn save-btn"
+                <button
+                 className="action-btn save-btn"
                   onClick={handleSavePatient}
-                  disabled={isSaving}
-                >
-                  {isSaving ? "Sauvegarde..." : (patientData.id ? "Mettre à jour" : "Enregistrer")}
-                </button>
+                   disabled={isSaving}
+>
+  {isSaving ? "Sauvegarde..." : "Enregistrer"}
+</button>
                 
                 <button 
                   className="action-btn maxillaire"

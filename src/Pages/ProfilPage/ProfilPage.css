@@ -289,6 +289,35 @@
   color: #7f8c8d;
   margin-top: 2rem;
 }
+/* Add to your ProfilPage.css */
+.prediction-creation-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.create-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.create-btn.maxillaire {
+  background-color: #4a89dc;
+  color: white;
+}
+
+.create-btn.mandibulaire {
+  background-color: #3bafda;
+  color: white;
+}
+
+.create-btn:hover {
+  opacity: 0.9;
+}
 
 /* ====================== */
 /* RESPONSIVE DESIGN      */
