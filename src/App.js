@@ -1,5 +1,5 @@
 import React from "react"; 
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate ,Outlet } from "react-router-dom";
 import Layout from "./components/Layout/layout";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
@@ -16,8 +16,17 @@ import ProfilPage from "./Pages/ProfilPage/ProfilPage";
 
 
 import "./App.css";
-
+const ProtectedRoute = () => {
+  const isAuthenticated = localStorage.getItem('isAuthenticated');
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/Signin" replace />;
+  }
+  
+  return <Outlet />;
+};
 function App() {
+
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Routes>
@@ -27,9 +36,11 @@ function App() {
         {/* Auth routes without Layout */}
         <Route path="/Signin" element={<Signin />} />
         <Route path="/Signup" element={<Signup />} />
+         <Route element={<ProtectedRoute />}>
+          <Route element={<Layout />}>
 
         {/* Protected routes with Layout (only accessible after login) */}
-        <Route element={<Layout />}>
+       
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/service" element={<Service />} />
@@ -40,6 +51,7 @@ function App() {
           <Route path="/FormDePredictionMand" element={<FormDePredictionMand />} />
           <Route path="/DeepLearning" element={<DeepLearning />} />
           <Route path="/ProfilPage" element={<ProfilPage />} />
+        </Route>
         </Route>
       </Routes>
     </Router>

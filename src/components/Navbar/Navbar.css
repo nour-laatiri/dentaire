@@ -9,6 +9,7 @@
   background-color: rgb(167, 205, 241);
   padding: 1.5rem;
   display: flex;
+  font-weight: bold;
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);

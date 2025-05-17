@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import { PatientService } from "../../components/firebase/firestore";
 import { auth } from "../../components/firebase/firebase";
 import "../PatientInfoPage/PatientInfoPage.css";
@@ -47,11 +47,7 @@ export default function PatientInfoPage() {
     loadPatientData();
   }, [location]);
 
-  const handleSignOut = () => {
-    auth.signOut()
-      .then(() => navigate('/Signin', { replace: true }))
-      .catch(error => console.error("Sign out error:", error));
-  };
+  
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -198,19 +194,7 @@ export default function PatientInfoPage() {
 
   return (
     <div className="dental-page">
-      <header className="header">
-        <Link to="/home" className="logo-text">PROTEQ</Link>
-        <nav className="nav">
-          <Link to="/home">Accueil</Link>
-          <Link to="/about">À propos</Link>
-          <Link to="/service">Services</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/ProfilPage">Mes patients</Link> 
-        </nav>
-        <button className="signout" onClick={handleSignOut}>
-          Déconnexion
-        </button>
-      </header>
+    
 
       <main className="info-page-container">
         <div className="info-page">
