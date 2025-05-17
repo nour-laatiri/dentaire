@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Link , useNavigate } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../FormDePredictionMand/FormDePredictionMand.css";
 import { auth } from "../../../components/firebase/firebase";
@@ -28,15 +28,7 @@ export default function PredictionFormPage() {
   const [error, setError] = useState(null);
   const { state } = useLocation();
   const isUpdate = !!state?.predictionId;
-  const handleSignOut = () => {
-    // Clear the authentication flag
-    localStorage.removeItem('isAuthenticated');  // <-- THIS IS THE CRUCIAL ADDITION
-    
-    // Replace the current entry in history stack with signin page
-    navigate('/Signin', { replace: true });  // Changed from '/' to '/Signin' to match your routes
-    
-    // Optional: Clear any user data from state/context here
-  };
+  
 
   useEffect(() => {
     console.log("Location state:", location.state);
@@ -215,21 +207,7 @@ const savePrediction = async () => {
 
   return (
     <div className="dental-page">
-      <header className="header">
-        <Link to="/home" className="logo-text">PROTEQ</Link>
-        <nav className="nav">
-          <Link to="/home">Accueil</Link>
-          <Link to="/about">À propos</Link>
-          <Link to="/service">Services</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/ProfilPage">Mes patients</Link> 
-          
-        </nav>
-        <button className="signout"onClick={handleSignOut}>
-        Deconnexion
 
-          </button>
-      </header>
 
       <main className="form-page-container">
         <div className="form-page">

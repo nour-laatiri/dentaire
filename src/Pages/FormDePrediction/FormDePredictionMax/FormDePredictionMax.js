@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../FormDePredictionMax/FormDePredictionMax.css";
 import { auth } from "../../../components/firebase/firebase";
@@ -30,10 +30,6 @@ export default function PredictionFormPage() {
   const [error, setError] = useState(null);
   
 
-  const handleSignOut = () => {
-    localStorage.removeItem('isAuthenticated');
-    navigate('/Signin', { replace: true });
-  };
 
   useEffect(() => {
     console.log("Location state:", location.state);
@@ -211,19 +207,7 @@ const savePrediction = async () => {
 
   return (
     <div className="dental-page">
-      <header className="header">
-        <Link to="/home" className="logo-text">PROTEQ</Link>
-        <nav className="nav">
-          <Link to="/home">Accueil</Link>
-          <Link to="/about">À propos</Link>
-          <Link to="/service">Services</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/ProfilPage">Mes patients</Link> 
-        </nav>
-        <button className="signout" onClick={handleSignOut}>
-          Deconnexion
-        </button>
-      </header>
+      
 
       <main className="form-page-container">
         <div className="form-page">

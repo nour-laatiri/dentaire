@@ -16,6 +16,7 @@ const SignIn = () => {
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const navigate = useNavigate();
 
+
   const getFriendlyErrorMessage = (errorCode) => {
     switch (errorCode) {
       case "auth/invalid-credential":

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+
 import axios from "axios";
 import "../DeepLearning/DeepLearning.css";
 import { auth } from "../../components/firebase/firebase";
@@ -19,10 +19,7 @@ export default function DeepLearning() {
   const image = location?.state?.image;
   const imageFile = location?.state?.imageFile;
   
-  const handleSignOut = () => {
-    localStorage.removeItem('isAuthenticated');
-    navigate('/Signin', { replace: true });
-  };
+  
 
   const handleBack = () => {
     navigate(-1);
@@ -169,19 +166,7 @@ const savePrediction = async () => {
 
   return (
     <div className="deep-learning-page">
-      <header className="header">
-        <Link to="/home" className="logo-text">PROTEQ</Link>
-        <nav className="nav">
-          <Link to="/home">Accueil</Link>
-          <Link to="/about">À propos</Link>
-          <Link to="/service">Services</Link>
-          <Link to="/contact">Contact</Link>
-          <Link to="/ProfilPage">Mes patients</Link>
-        </nav>
-        <button className="signout" onClick={handleSignOut}>
-          Deconnexion
-        </button>
-      </header>
+     
       <button onClick={handleBack} className="back-button">
         &larr; Retour
       </button>
