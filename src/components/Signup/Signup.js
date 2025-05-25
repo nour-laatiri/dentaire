@@ -42,8 +42,11 @@ export default function Signup() {
       try {
         await doCreateUserWithEmailAndPassword(form.email, form.password);
         await doSendEmailVerification();
-        navigate("/home"); 
+        localStorage.setItem('isAuthenticated', 'true');
+        navigate("/Home",{ replace: true }); 
       } catch (err) {
+        localStorage.removeItem('isAuthenticated');
+        localStorage.removeItem('user');
         setError(getFriendlyErrorMessage(err.code));
         setIsRegistering(false);
       }
