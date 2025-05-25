@@ -28,7 +28,7 @@ export default function PredictionFormPage() {
   const [modifications, setModifications] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const voileDuPalaisOptions = ["classe l", "classe ll", "classe lll", "classe lv", "classe v"];
+  const voileDuPalaisOptions = ["classe l", "classe ll", "classe lll", "classe lv"];
 const classeEdentementOptions = ["classe l", "classe ll", "classe lll", "classe lv", "classe v"];
   
 
