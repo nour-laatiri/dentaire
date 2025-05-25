@@ -28,6 +28,8 @@ export default function PredictionFormPage() {
   const [modifications, setModifications] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const voileDuPalaisOptions = ["classe l", "classe ll", "classe lll", "classe lv", "classe v"];
+const classeEdentementOptions = ["classe l", "classe ll", "classe lll", "classe lv", "classe v"];
   
 
 
@@ -229,6 +231,19 @@ const savePrediction = async () => {
                   {pair.map((fieldName) => (
                     <div className="feature-input" key={fieldName}>
                       <label>{fieldName}</label>
+                      {fieldName === "voile du palais" || fieldName === "Classe d'édentement" ? (
+                        <select
+                          name={fieldName}
+                          value={formData[fieldName]}
+                          onChange={handleChange}
+                          className="input"
+                        >
+                          <option value="">Sélectionnez une option</option>
+                          {(fieldName === "voile du palais" ? voileDuPalaisOptions : classeEdentementOptions).map((option) => (
+                            <option key={option} value={option}>{option}</option>
+                          ))}
+                        </select>
+                      ) : (
                       <input
                         type="text"
                         name={fieldName}
@@ -236,7 +251,8 @@ const savePrediction = async () => {
                         onChange={handleChange}
                         className="input"
                         
-                      />
+                       />
+                      )}
                     </div>
                   ))}
                 </div>
