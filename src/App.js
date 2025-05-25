@@ -1,9 +1,9 @@
-import React from "react"; 
+import React from "react";
+ // Adjust path to your Firebase config file
 import { BrowserRouter as Router, Routes, Route, Navigate ,Outlet } from "react-router-dom";
 import Layout from "./components/Layout/layout";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
-import Contact from "./components/Contact/Contact";
 import Service from "./components/Service/Service";
 import Signin from "./components/Signin/signin";
 import Signup from "./components/Signup/Signup";
@@ -12,12 +12,13 @@ import PatientInfoPage from "./Pages/PatientInfoPage/PatientInfoPage";
 import FormDePredictionMand from "./Pages/FormDePrediction/FormDePredictionMand/FormDePredictionMand";
 import FormDePredictionMax from "./Pages/FormDePrediction/FormDePredictionMax/FormDePredictionMax";
 import DeepLearning from "./Pages/DeepLearning/DeepLearning";
+import { auth } from './components/firebase/firebase';
 import ProfilPage from "./Pages/ProfilPage/ProfilPage";
 
 
 import "./App.css";
 const ProtectedRoute = () => {
-  const isAuthenticated = localStorage.getItem('isAuthenticated');
+   const isAuthenticated = localStorage.getItem('isAuthenticated') && auth.currentUser;
   
   if (!isAuthenticated) {
     return <Navigate to="/Signin" replace />;
@@ -44,7 +45,6 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/service" element={<Service />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/FormPatient" element={<FormPatient />} />
           <Route path="/PatientInfoPage" element={<PatientInfoPage />} />
           <Route path="/FormDePredictionMax" element={<FormDePredictionMax />} />

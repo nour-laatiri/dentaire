@@ -26,12 +26,12 @@ export default function DeepLearning() {
   };
 const savePrediction = async () => {
     if (!patientData?.id || !prediction) {
-      alert("Patient data or prediction missing");
+      alert("Données du patient ou prédiction manquantes");
       return;
     }
 
     if (!auth.currentUser) {
-      alert("User not authenticated");
+      alert("Utilisateur non authentifié");
       return;
     }
 
@@ -135,7 +135,7 @@ const savePrediction = async () => {
 
   const processImage = async () => {
     if (!imageFile) {
-      setError("No image available for processing");
+      setError("Aucune image disponible pour le traitement");
       return;
     }
 

@@ -47,15 +47,27 @@ model = keras.Sequential([
     vgg_base,
     layers.Flatten(),
     layers.Dense(128, activation='relu'),
-    layers.Dropout(0.5),
+    layers.Dropout(0.6),
     layers.Dense(3, activation='softmax')  # 3 classes
 ])
+# After 5 epochs of training, unfreeze some layers
 
 # Compile model
-model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
+optimizer = tf.keras.optimizers.Adam(learning_rate=0.00001)  # Changed learning rate
+model.compile(optimizer=optimizer, 
+              loss='sparse_categorical_crossentropy', 
+              metrics=['accuracy'])
+
+datagen = tf.keras.preprocessing.image.ImageDataGenerator(
+    rotation_range=30,
+    horizontal_flip=True,
+    zoom_range=0.2
+)
+model.fit(datagen.flow(X_train, y_train), epochs=20, validation_data=(X_test, y_test))
 # Train model
-model.fit(X_train, y_train, epochs=10, validation_data=(X_test, y_test))
+
+# Stop training when validation loss plateaus
 
 # Save model
 model.save("dental_prosthesis_model_vgg16.keras")
@@ -74,9 +86,9 @@ def predict_prosthesis(image_path, model_path="dental_prosthesis_model_vgg16.h5"
     confidence = np.max(prediction) * 100  # Confidence percentage
 
     descriptions = {
-        "Favorable": "Best Design – Well-balanced retention and stability.",
-        "Moderate": "Moderate Design – Somewhat stable but could be improved with additional posterior support.",
-        "Not Favorable": "Least Favorable Design – Insufficient retention and stability due to lack of posterior support."
+        "Favorable" : "Meilleur design – Bon équilibre entre rétention et stabilité.",  
+        "Moyennement favorable" : "Design modéré – Assez stable mais pourrait être amélioré avec un support postérieur supplémentaire.",  
+        "Non favorable" : "Design le moins favorable – Rétention et stabilité insuffisantes en raison d'un manque de support postérieur."  
     }
     return f"Prediction: {class_text} ({confidence:.2f}% confidence)\nDescription: {descriptions[class_text]}"
 

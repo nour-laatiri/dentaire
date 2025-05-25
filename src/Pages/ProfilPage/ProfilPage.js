@@ -65,7 +65,7 @@ setPredictionsMap(prev => ({
           
         
     } catch (error) {
-      console.error("Error fetching predictions:", error);
+      console.error("Erreur lors de la récupération des prédiction:", error);
     } finally {
       setLoadingPredictions(prev => ({ ...prev, [patientId]: false }));
     }
@@ -78,7 +78,7 @@ const handleDeletePatient = async (patientId) => {
       await PatientService.deletePatient(auth.currentUser.uid, patientId);
       setPatients(patients.filter(p => p.id !== patientId));
     } catch (error) {
-      console.error("Error deleting patient:", error);
+      console.error("Erreur lors de la suppression de la patient:", error);
     }
   }
 };
@@ -101,7 +101,7 @@ const handleDeletePrediction = async (patientId, predictionId) => {
       await PatientService.deletePrediction(auth.currentUser.uid, patientId, predictionId);
       fetchPredictions(patientId); // Refresh predictions
     } catch (error) {
-      console.error("Error deleting prediction:", error);
+      console.error("Erreur lors de la suppression de la prédiction:", error);
     }
   }
 };
@@ -143,7 +143,7 @@ const PredictionHistory = ({ patientId }) => {
               handleCreateNewPrediction(patientId, 'maxillaire');
             }}
           >
-            + Ajouter Prédiction Maxillaire
+            + Ajouter prédiction maxillaire avec un formulaire de saisie
           </button>
         )}
         
@@ -155,7 +155,7 @@ const PredictionHistory = ({ patientId }) => {
               handleCreateNewPrediction(patientId, 'mandibulaire');
             }}
           >
-            + Ajouter Prédiction Mandibulaire
+            + Ajouter prédiction mandibulaire avec un formulaire de saisie
           </button>
         )}
       </div>

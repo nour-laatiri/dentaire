@@ -39,8 +39,8 @@ export default function PatientInfoPage() {
           setPatientData(location.state.patientInfo);
         }
       } catch (error) {
-        console.error("Error loading patient:", error);
-        alert("Failed to load patient data");
+        console.error("Erreur lors du chargement du patient:", error);
+        alert("Échec du chargement des données du patient");
       }
     };
 

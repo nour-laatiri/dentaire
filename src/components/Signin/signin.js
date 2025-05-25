@@ -3,7 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { 
   doSignInUserWithEmailAndPassword,
   doPasswordReset,
-  doSignInWithGoogle
+  doSignInWithGoogle,
+  clearAuthState,
+  doSendEmailVerification
+
 } from "../firebase/auth";
 import "./Signin.css";
 import { FcGoogle } from "react-icons/fc";
@@ -30,20 +33,37 @@ const SignIn = () => {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    setIsGoogleLoading(true);
-    setError(null);
+const handleGoogleSignIn = async () => {
+  setIsGoogleLoading(true);
+  setError(null);
+  
+  try {
+    // ADDED: Clear previous auth state to ensure fresh sign-in
+    await clearAuthState();
     
-    try {
-      await doSignInWithGoogle();
-      localStorage.setItem('isAuthenticated', 'true');
-      navigate("/home");
-    } catch (err) {
-      setError(getFriendlyErrorMessage(err.code));
-    } finally {
-      setIsGoogleLoading(false);
+    const result = await doSignInWithGoogle(); // Changed to capture result
+    
+    // ADDED: Check if email is verified (optional)
+    if (!result.user.emailVerified) {
+      await doSendEmailVerification();
     }
-  };
+    
+    localStorage.setItem('isAuthenticated', 'true');
+    navigate("/home");
+  } catch (err) {
+    // IMPROVED: Specific error handling for popup closures
+    if (err.code === 'auth/popup-closed-by-user') {
+      setError('La fenêtre de connexion a été fermée. Veuillez réessayer.');
+    } else {
+      setError(getFriendlyErrorMessage(err.code));
+    }
+    
+    // ADDED: Clear potential partial auth state on error
+    await clearAuthState();
+  } finally {
+    setIsGoogleLoading(false);
+  }
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();

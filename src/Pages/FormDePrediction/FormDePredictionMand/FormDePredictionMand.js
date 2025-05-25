@@ -51,7 +51,7 @@ useEffect(() => {
         setModifications(existingPrediction.modifications || []);
         setPrediction(existingPrediction.result || null);
       } catch (error) {
-        console.error("Error loading existing prediction:", error);
+        console.error("Erreur lors du chargement de la prédiction existante:", error);
       }
     };
     loadExistingPrediction();
@@ -78,18 +78,18 @@ useEffect(() => {
         setModifications([]);
       }
     } catch (error) {
-      console.error("Prediction error:", error);
+      console.error("Erreur lors Prédiction :", error);
     }
   };
   
 const savePrediction = async () => {
   if (!patientData?.id || !prediction) {
-    alert("Patient data or prediction missing");
+    alert("Données du patient ou prédiction manquantes");
     return;
   }
   
   if (!auth.currentUser) {
-    alert("User not authenticated");
+    alert("Utilisateur non authentifié");
     return;
   }
 
@@ -109,7 +109,7 @@ const savePrediction = async () => {
       lastUpdated: serverTimestamp()
     };
     
-    console.log("Saving prediction data:", predictionData);
+    console.log("Enregistrement des données de prédiction:", predictionData);
     
     // Check if we're updating an existing prediction or creating a new one
     if (location.state?.predictionId) {
